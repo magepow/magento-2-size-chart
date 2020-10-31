@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="magepow" translate="label" sortOrder="10">
+            <label>Magepow</label>
+        </tab>
+        <section id="sizechart" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Size Chart</label>
+            <tab>magepow</tab>
+            <resource>Magepow_SizeChart::sizechart_config</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label><![CDATA[General]]></label>
+                <field id="enabled" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="1" canRestore="1">
+                    <label>Module Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="display_text" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" sshowInStore="1" canRestore="1">
+                    <label>Display Text Link</label>
+                    
+                    <comment>This text will display the link for showing popup sizechart</comment>
+                      <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                   <field id="image_icon" translate="label" type="image" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Image Icon</label>
+        <comment>This section will display the icon for showing popup sizechart</comment>
+        <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+        <upload_dir config="system/filesystem/media" scope_info="1">magepow/sizechart</upload_dir>
+                    <base_url type="media" scope_info="1">magepow/sizechart</base_url>
+                     <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

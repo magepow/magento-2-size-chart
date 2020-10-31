@@ -1,0 +1,17 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <preference for="Magepow\SizeChart\Api\Data\SizeChartInterface" type="Magepow\SizeChart\Model\SizeChart" />
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+            <item name="magepow_sizechart_sizechart_listing_data_source" xsi:type="string">Magepow\SizeChart\Model\ResourceModel\SizeChart\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Magepow\SizeChart\Model\ResourceModel\SizeChart\Grid\Collection" 
+        type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+        <argument name="mainTable" xsi:type="string">sizechart_management</argument>
+            <argument name="resourceModel" xsi:type="string">Magepow\SizeChart\Model\ResourceModel\SizeChart</argument>
+        </arguments>
+    </virtualType>
+</config>

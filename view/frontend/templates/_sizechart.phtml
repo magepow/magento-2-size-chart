@@ -1,0 +1,84 @@
+<?php $helper = $this->helper('Magepow\SizeChart\Helper\Data');
+$isEnabled =  $helper->getConfig('sizechart/general/enabled'); 
+$isTextLinkDisplayed = $helper->getConfig('sizechart/general/display_text');
+$iconImage   = $helper->getConfig('sizechart/general/image_icon');
+
+ $iconImage = $block->getMedia($iconImage);
+
+// $isImageIconDisplayed = $block->getMedia('sizechart/general/image_icon');
+// $isImageIconDisplayed = $helper->getConfig('sizechart/general/image_icon');
+
+// echo $isTextLinkDisplayed;
+// echo $productStockById;
+
+?>
+<?php
+    if ($isEnabled == 1) {        
+?> 
+    <div class="sizechart">
+
+        <div class="sizechart-display">
+            <p class="textlink"><?php echo $isTextLinkDisplayed; ?></p>
+            <img src="<?php echo($iconImage); ?>" alt="this is image icon">
+        </div>
+
+        <?php 
+
+        foreach ($block->getSizeChartCollection() as $key => $sizechart) {
+            // echo $sizechart->getTypeDisplay();
+           
+                ?>
+         <div class="sizechart-info">
+            
+                <h2 class="sizechart-title"><? echo $sizechart->getName();?></h2>
+                <p class="sizechart-description"><?php echo $sizechart->getDescription(); ?></p>
+                <div class="sizechart-infotable">
+                    <?php echo $sizechart->getSizechartInfo(); ?>
+                </div>  
+                </div> 
+<!-- <script type="text/javascript">
+        require([
+            'jquery','Magento_Ui/js/modal/modal'
+        ], function(jQuery){
+            (function($,modal) {
+                $(".textlink").click(function(){
+                    <?php //if($sizechart->getTypeDisplay() == 1): ?>
+                    $(".sizechart-info").toggle();
+                <?php //endif; ?>
+                <?php //if($sizechart->getTypeDisplay() == 2):?>
+                     var options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                title: '',
+                buttons: [{
+                    text: $.mage.__('Close'),
+                    class: '',
+                    click: function () {
+                        this.closeModal();
+                    }
+                }]
+            };
+
+            var popup = modal(options, $('.sizechart-info'));
+            $(".textlink").on('click',function(){ 
+                $(".sizechart-info").modal("openModal");
+            });
+                <?php //endif; ?>
+                });
+            });
+        });
+    </script> -->
+
+
+
+                    <?php
+                }
+            ?>
+        
+    </div>
+     <?php
+
+    }
+
+?>  

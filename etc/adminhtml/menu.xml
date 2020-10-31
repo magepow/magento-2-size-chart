@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Magepow_SizeChart::elements" title="Size Chart" module="Magepow_SizeChart" parent="Magento_Catalog::catalog" sortOrder="10"  resource="Magepow_SizeChart::elements"/>
+        <add id="Magepow_SizeChart::sizechart" title="Size Chart Management" module="Magepow_SizeChart" parent="Magepow_SizeChart::elements" sortOrder="20" action="magepow_sizechart/sizechart" resource="Magepow_SizeChart::sizechart"/>
+        <add id="Magepow_SizeChart::config_sizechart" title="Configuration" module="Magepow_SizeChart" parent="Magepow_SizeChart::elements" sortOrder="30"
+        action="adminhtml/system_config/edit/section/sizechart" resource="Magepow_SizeChart::sizechart_configuration"/>
+    </menu>
+</config>
