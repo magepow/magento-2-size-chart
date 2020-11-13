@@ -1,5 +1,5 @@
 <?php
-namespace Magepow\SizeChart\Controller\Index;
+namespace Magepow\Sizechart\Controller\Index;
 
 class Index extends \Magento\Framework\App\Action\Action
 {
@@ -10,7 +10,7 @@ class Index extends \Magento\Framework\App\Action\Action
 	public function __construct(
 		\Magento\Framework\App\Action\Context $context,
 		\Magento\Framework\View\Result\PageFactory $pageFactory,
-		\Magepow\SizeChart\Model\SizeChartFactory $sizechartFactory
+		\Magepow\Sizechart\Model\SizechartFactory $sizechartFactory
 		)
 	{
 		$this->_pageFactory = $pageFactory;

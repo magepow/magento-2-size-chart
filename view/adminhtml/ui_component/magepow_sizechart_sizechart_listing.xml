@@ -103,7 +103,7 @@
         </column>
         <column name="is_active" >
            <argument name="data" xsi:type="array">
-               <item name="options" xsi:type="object">Magepow\SizeChart\Model\Status</item>
+               <item name="options" xsi:type="object">Magepow\Sizechart\Model\Status</item>
                <item name="config" xsi:type="array">
                    <item name="filter" xsi:type="string">select</item>
                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
@@ -114,7 +114,7 @@
        </column>
         <column name="type_display" >
            <argument name="data" xsi:type="array">
-               <item name="options" xsi:type="object">Magepow\SizeChart\Model\TypeDisplay</item>
+               <item name="options" xsi:type="object">Magepow\Sizechart\Model\TypeDisplay</item>
                <item name="config" xsi:type="array">
                    <item name="filter" xsi:type="string">select</item>
                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
@@ -143,7 +143,7 @@
                 </item>
             </argument>
         </column>
-         <actionsColumn name="actions" class = "Magepow\SizeChart\Ui\Component\Listing\SizeChart\Column\Action">
+         <actionsColumn name="actions" class = "Magepow\Sizechart\Ui\Component\Listing\Sizechart\Column\Action">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="resizeEnabled" xsi:type="boolean">false</item>

@@ -1,0 +1,39 @@
+<?php 
+$helper = $this->helper('Magepow\Sizechart\Helper\Data');
+$isEnabled =  $helper->getConfigModule('general/enabled'); 
+$product = $block->getCurrentProduct();
+$categoryIds = $product->getCategoryIds();
+$relativeCategory = $categoryIds[0];
+$category = $this->getCategory($relativeCategory);
+$categoryIdCurrentProduct = $category->getId();
+$categoryArray = array($categoryIdCurrentProduct);
+
+ if($isEnabled){
+	
+foreach ($block->getSizeChartCollection() as $item) {
+   if($item->getTypeDisplay() == 3){
+    $categoryIdAdmin = $item->getCategory();
+  $categoryId = explode(",",$categoryIdAdmin);
+     if(array_intersect($categoryArray, $categoryId)){
+
+  ?>
+<div class="sizechart">
+      
+         <h2 class="sizechart-name"><?php echo $item->getName();?></h2>
+        <div class="info">
+            <p class="des"><?php echo $item->getDescription(); ?></p>
+
+        </div>
+        <div class="sizechart-digram">
+            <?php echo $item->getSizechartInfo();?>
+        </div> 
+ 
+</div>
+
+<?php
+}
+}
+}
+}
+
+?>

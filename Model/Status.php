@@ -1,5 +1,5 @@
 <?php 
-namespace Magepow\SizeChart\Model;
+namespace Magepow\Sizechart\Model;
 use Magento\Framework\Data\OptionSourceInterface;
  
 class Status implements OptionSourceInterface

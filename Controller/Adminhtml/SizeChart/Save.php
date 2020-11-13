@@ -1,6 +1,6 @@
 <?php
 
-namespace Magepow\SizeChart\Controller\Adminhtml\SizeChart;
+namespace Magepow\Sizechart\Controller\Adminhtml\Sizechart;
 
 
 class Save extends \Magento\Backend\App\Action
@@ -32,7 +32,7 @@ class Save extends \Magento\Backend\App\Action
      
         if ($data) {
             $id = $this->getRequest()->getParam('entity_id');
-            $model = $this->_objectManager->create('Magepow\SizeChart\Model\SizeChart')->load($id);
+            $model = $this->_objectManager->create('Magepow\Sizechart\Model\Sizechart')->load($id);
             if (!$model->getId() && $id) {
                 $this->messageManager->addError(__('This item no longer exists.'));
                 return $resultRedirect->setPath('*/*/');

@@ -1,6 +1,6 @@
 <?php
 
-namespace Magepow\SizeChart\Setup;
+namespace Magepow\Sizechart\Setup;
 use Magento\Framework\DB\Ddl\Table;
 use Magento\Framework\DB\Adapter\AdapterInterface;
 use Magento\Framework\Setup\InstallSchemaInterface;

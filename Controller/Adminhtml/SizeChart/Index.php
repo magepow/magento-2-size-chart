@@ -1,5 +1,5 @@
 <?php
-namespace Magepow\SizeChart\Controller\Adminhtml\SizeChart;
+namespace Magepow\Sizechart\Controller\Adminhtml\Sizechart;
 
 class Index extends \Magento\Backend\App\Action
 {

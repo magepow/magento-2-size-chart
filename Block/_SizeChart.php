@@ -1,12 +1,12 @@
 <?php
-namespace Magepow\SizeChart\Block;
+namespace Magepow\Sizechart\Block;
 class SizeChart extends \Magento\Framework\View\Element\Template
 {
 	protected $_sizechartFactory;
 	// protected $_cacheTypeList;
 	// protected $_cacheFrontendPool;
 	public function __construct(\Magento\Framework\View\Element\Template\Context $context,
-		\Magepow\SizeChart\Model\SizeChartFactory $sizechartFactory,
+		\Magepow\Sizechart\Model\SizechartFactory $sizechartFactory,
 		 \Magento\Store\Model\StoreManagerInterface $storeManager,
 		  \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList,
     \Magento\Framework\App\Cache\Frontend\Pool $cacheFrontendPool,

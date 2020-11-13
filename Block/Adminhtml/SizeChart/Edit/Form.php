@@ -1,5 +1,5 @@
 <?php
-namespace Magepow\SizeChart\Block\Adminhtml\SizeChart\Edit;
+namespace Magepow\Sizechart\Block\Adminhtml\Sizechart\Edit;
  
 class Form extends \Magento\Backend\Block\Widget\Form\Generic
 {

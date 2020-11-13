@@ -1,11 +1,11 @@
 <?php
 
-namespace Magepow\SizeChart\Controller\Adminhtml\SizeChart;
+namespace Magepow\Sizechart\Controller\Adminhtml\Sizechart;
 
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Backend\App\Action\Context;
 use Magento\Ui\Component\MassAction\Filter;
-use Magepow\SizeChart\Model\ResourceModel\SizeChart\CollectionFactory;
+use Magepow\Sizechart\Model\ResourceModel\Sizechart\CollectionFactory;
 
 class MassDelete extends \Magento\Backend\App\Action
 {
@@ -49,6 +49,6 @@ class MassDelete extends \Magento\Backend\App\Action
 
     protected function _isAllowed()
     {
-        return $this->_authorization->isAllowed('Magepow_SizeChart::row_data_delete');
+        return $this->_authorization->isAllowed('Magepow_Sizechart::row_data_delete');
     }
 }

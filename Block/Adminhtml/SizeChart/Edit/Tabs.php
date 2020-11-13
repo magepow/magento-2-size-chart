@@ -1,6 +1,6 @@
 <?php
 
-namespace Magepow\SizeChart\Block\Adminhtml\SizeChart\Edit;
+namespace Magepow\Sizechart\Block\Adminhtml\Sizechart\Edit;
 use Magento\Backend\Block\Widget\Tabs as WidgetTabs;
 
 
@@ -14,7 +14,7 @@ class Tabs extends WidgetTabs
     protected function _construct()
     {
         parent::_construct();
-        $this->setId('sizeChart_tabs');
+        $this->setId('sizechart_tabs');
         $this->setDestElementId('edit_form');
         $this->setTitle(__('Size Chart Information'));
     }
@@ -30,7 +30,7 @@ class Tabs extends WidgetTabs
                 'label' => __('General Information'),
                 'title' => __('General Information'),
                 'content' => $this->getLayout()->createBlock(
-                    'Magepow\SizeChart\Block\Adminhtml\SizeChart\Edit\Tab\Main'
+                    'Magepow\Sizechart\Block\Adminhtml\Sizechart\Edit\Tab\Main'
                 )->toHtml(),
             ]
         );
@@ -40,7 +40,7 @@ class Tabs extends WidgetTabs
                 'label' => __('Category Information'),
                 'title' => __('Category Information'),
                 'content' => $this->getLayout()->createBlock(
-                    'Magepow\SizeChart\Block\Adminhtml\SizeChart\Edit\Tab\Category'
+                    'Magepow\Sizechart\Block\Adminhtml\Sizechart\Edit\Tab\Category'
                 )->toHtml(),
             ]
         );

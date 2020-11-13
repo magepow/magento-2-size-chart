@@ -1,6 +1,6 @@
 <?php
 
-namespace Magepow\SizeChart\Block\Adminhtml\SizeChart\Edit\Tab;
+namespace Magepow\Sizechart\Block\Adminhtml\SizeChart\Edit\Tab;
 
 use Magento\Backend\Block\Widget\Form\Generic;
 use Magento\Backend\Block\Widget\Tab\TabInterface;
@@ -18,8 +18,8 @@ class Main extends Generic implements TabInterface
         \Magento\Framework\Data\FormFactory $formFactory,
         \Magento\Store\Model\System\Store $systemStore,
         \Magento\Framework\ObjectManagerInterface $objectManager,
-        \Magepow\SizeChart\Model\Status $options,
-        \Magepow\SizeChart\Model\TypeDisplay $typeDisplay,
+        \Magepow\Sizechart\Model\Status $options,
+        \Magepow\Sizechart\Model\TypeDisplay $typeDisplay,
         array $data = []
     ) {
       
@@ -149,18 +149,7 @@ class Main extends Generic implements TabInterface
 
             ]
         );
-         $fieldset->addField(
-            'template_css',
-            'textarea',
-            [
-                'name' => 'template_css',
-                'label' => __('Template CSS'),
-                'id' => 'template_css',
-                'title' => __('Template CSS'),
-                'style'=>'height:10em',
-                'required' => false,
-            ]
-        );
+         
 
         $form->setValues($model->getData());
         $this->setForm($form);

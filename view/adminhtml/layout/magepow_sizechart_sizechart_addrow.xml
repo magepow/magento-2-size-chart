@@ -3,11 +3,11 @@
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
     	<referenceContainer name="left">
-            <block class="Magepow\SizeChart\Block\Adminhtml\SizeChart\Edit\Tabs"
+            <block class="Magepow\Sizechart\Block\Adminhtml\Sizechart\Edit\Tabs"
                    name="tabs"/>
         </referenceContainer>
         <referenceContainer name="content">
-            <block class="Magepow\SizeChart\Block\Adminhtml\SizeChart\AddRow" name="add_row" />
+            <block class="Magepow\Sizechart\Block\Adminhtml\Sizechart\AddRow" name="add_row" />
         </referenceContainer>
     </body>
 </page>

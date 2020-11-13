@@ -6,6 +6,6 @@
 
 \Magento\Framework\Component\ComponentRegistrar::register(
     \Magento\Framework\Component\ComponentRegistrar::MODULE,
-    'Magepow_SizeChart',
+    'Magepow_Sizechart',
     __DIR__
 );

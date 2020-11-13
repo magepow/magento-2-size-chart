@@ -1,6 +1,6 @@
 <?php
 
-namespace Magepow\SizeChart\Ui\Component\Listing\SizeChart\Column;
+namespace Magepow\Sizechart\Ui\Component\Listing\Sizechart\Column;
 
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;

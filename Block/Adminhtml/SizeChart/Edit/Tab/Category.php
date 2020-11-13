@@ -1,6 +1,6 @@
 <?php
 
-namespace Magepow\SizeChart\Block\Adminhtml\SizeChart\Edit\Tab;
+namespace Magepow\Sizechart\Block\Adminhtml\Sizechart\Edit\Tab;
 
 use Magento\Backend\Block\Widget\Form\Generic;
 use Magento\Backend\Block\Widget\Tab\TabInterface;
@@ -20,7 +20,7 @@ class Category extends Generic implements TabInterface
         \Magento\Store\Model\System\Store $systemStore,
         \Magento\Framework\ObjectManagerInterface $objectManager,
         // \Magepow\SizeChart\Model\SizeChart $sizechart,
-         \Magepow\SizeChart\Model\System\Config\Category $category,
+         \Magepow\Sizechart\Model\System\Config\Category $category,
         array $data = []
     ) {
       
@@ -48,29 +48,30 @@ class Category extends Generic implements TabInterface
                 ['legend' => __('Add Category Rule'), 'class' => 'fieldset-wide']
             );
         }
-        $fieldset->addType(
-        'categories',
-        '\Magento\Catalog\Block\Adminhtml\Product\Helper\Form\Category'
-       );
+       //  $fieldset->addType(
+       //  'categories',
+       //  '\Magento\Catalog\Block\Adminhtml\Product\Helper\Form\Category'
+       // );
  
-        // $category_ids = $fieldset->addField('category_ids', 'multiselect',
-        //     [
-        //         'label' => __('Categories'),
-        //         'title' => __('Categories'),
-        //         'name'  => 'category_ids',
-        //         'required' => true,
-        //         'values' => $this->_category->toOptionArray(),
-        //     ]
-        // );
-$fieldset->addField(
-        'category',
-        'categories',
-        [
-            'name' => 'category',
-            'label' => __('Category'),
-            'title' => __('Category')
-        ]
-    );
+        $category = $fieldset->addField('category', 'multiselect',
+            [
+                'label' => __('Categories'),
+                'title' => __('Categories'),
+                'name'  => 'category',
+                'required' => true,
+                'values' => $this->_category->toOptionArray(),
+                'note' => 'Please follow stricly this rule to make sure you size chart shows up on frontend: Level 2 -> level 3 -> level 4. For example: Women -> Tops -> Jackets.'
+            ]
+        );
+// $fieldset->addField(
+//         'category',
+//         'categories',
+//         [
+//             'name' => 'category',
+//             'label' => __('Category'),
+//             'title' => __('Category')
+//         ]
+//     );
         
        
 

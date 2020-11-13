@@ -1,8 +1,8 @@
 <?php
 
-namespace Magepow\SizeChart\Api\Data;
+namespace Magepow\Sizechart\Api\Data;
 
- Interface SizeChartInterface
+ Interface SizechartInterface
 {
   const ENTITY_ID = 'entity_id';
   const CATEGORY_ID = 'category_id';

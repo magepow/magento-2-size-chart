@@ -1,7 +1,7 @@
 <?php
-namespace Magepow\SizeChart\Model;
- use Magepow\SizeChart\Api\Data\SizeChartInterface;
-class SizeChart extends \Magento\Framework\Model\AbstractModel implements SizeChartInterface
+namespace Magepow\Sizechart\Model;
+ use Magepow\Sizechart\Api\Data\SizechartInterface;
+class Sizechart extends \Magento\Framework\Model\AbstractModel implements SizechartInterface
 {
 	const CACHE_TAG = 'sizechart_management';
 
@@ -11,7 +11,7 @@ class SizeChart extends \Magento\Framework\Model\AbstractModel implements SizeCh
 
 	protected function _construct()
 	{
-		$this->_init('Magepow\SizeChart\Model\ResourceModel\SizeChart');
+		$this->_init('Magepow\Sizechart\Model\ResourceModel\Sizechart');
 	}
 
 	public function getIdentities()

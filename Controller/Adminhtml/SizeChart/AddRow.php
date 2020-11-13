@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Magepow\SizeChart\Controller\Adminhtml\SizeChart;
+namespace Magepow\Sizechart\Controller\Adminhtml\Sizechart;
 
 use Magento\Framework\Controller\ResultFactory;
 
@@ -11,7 +11,7 @@ class AddRow extends \Magento\Backend\App\Action
     private $sizechartFactory;
 
     public function __construct(\Magento\Backend\App\Action\Context $context, \Magento\Framework\Registry $coreRegistry,
-        \Magepow\SizeChart\Model\SizeChartFactory $sizechartFactory
+        \Magepow\Sizechart\Model\SizechartFactory $sizechartFactory
     ) {
         parent::__construct($context);
         $this->coreRegistry = $coreRegistry;

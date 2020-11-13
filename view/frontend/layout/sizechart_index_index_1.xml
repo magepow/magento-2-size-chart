@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+
+    <body>
+        <!-- <referenceContainer name="product.info.addtocart">           
+            <block class="Magepow\SizeChart\Block\SizeChart" name="sizechart"  template="Magepow_SizeChart::sizechart.phtml" cacheable="false" /> 
+        </referenceContainer> -->
+         <referenceContainer name="product.info.main">
+            <block class="Magepow\Sizechart\Block\Sizechart" 
+              template="Magepow_Sizechart::sizechart.phtml" name="sizechart" 
+              />          
+        </referenceContainer>
+        <referenceContainer name="product.info.form.content">
+ 
+     <block class="Magento\Framework\View\Element\Template" name="product.info.enquiry" after="product.info.addtocart"
+template="Magepow_Sizechart::customtab.phtml">
+     </block>
+ </referenceContainer>
+         <!-- <referenceBlock name="product.info.details">
+           <block class="Magento\Catalog\Block\Product\View" name="custom.tab" template="Magepow_SizeChart::customtab.phtml" group="detailed_info" >
+               <arguments>
+                   <argument translate="true" name="title" xsi:type="string">Custom Tab</argument>
+               </arguments>
+           </block>
+       </referenceBlock> -->
+        
+    </body>
+</page>

@@ -1,5 +1,67 @@
+ <?php
+$helper = $this->helper('Magepow\Sizechart\Helper\Data');
+$isEnabled =  $helper->getConfigModule('general/enabled'); 
+$isTextLinkDisplayed = $helper->getConfigModule('general/display_text');
+$iconImage   = $helper->getConfigModule('general/image_icon');
+$iconImageShow = $block->getMedia($iconImage);
+$product = $block->getCurrentProduct();
+$categoryIds = $product->getCategoryIds();
+$relativeCategory = $categoryIds[0];
+$category = $this->getCategory($relativeCategory);
+$categoryIdCurrentProduct = $category->getId();
+$categoryArray = array($categoryIdCurrentProduct);
 
-<?php 
-echo $block->getSizeChartCollection();
+  ?>
+
+ <?php 
+ if($isEnabled){
+  
+   
+ foreach ($block->getSizeChartCollection() as $item) {
+ 	
+  $categoryIdAdmin = $item->getCategory();
+  $categoryId = explode(",",$categoryIdAdmin);
+  // print_r($categoryId);
+  
+   if(array_intersect($categoryArray, $categoryId)){
+  //    print_r(array_intersect($categoryArray, $categoryId));
+  // }else{
+  //   echo "string";
+  // }
+
+  
+ ?>
+  
+ <div class="sizechart">
+ 	<?php if($item->getTypeDisplay() == 2) { ?>
+ 		<div data-mage-init='{"sizechart": {}}'>
+     		 <div class="sizechart-display">
+            <img src="<?php echo $iconImageShow; ?>" alt="this is image icon"> 
+           <a href = "#" class="textlink"><?php echo $isTextLinkDisplayed; ?></a>
+        </div>
+       </div>
+        <?php 
+    }
+        ?>
+     <div class="<?php echo $this->getClass($item);?>"> 
+     	
+         <h2 class="sizechart-name"><?php echo $item->getName();?></h2>
+        <div class="info">
+            <p class="des"><?php echo $item->getDescription(); ?></p>
+
+        </div>
+        <div class="sizechart-digram">
+            <?php echo $item->getSizechartInfo();?>
+        </div> 
+
+     </div> 
+    
+  </div> 
+  <?php 
+ }
+     }
+ }
+
+  ?>
  
-?>
+  

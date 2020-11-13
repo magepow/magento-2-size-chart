@@ -1,8 +1,8 @@
 <?php
-namespace Magepow\SizeChart\Model\ResourceModel;
+namespace Magepow\Sizechart\Model\ResourceModel;
 
 
-class SizeChart extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
+class Sizechart extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 {
 	
 	public function __construct(

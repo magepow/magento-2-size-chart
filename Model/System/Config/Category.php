@@ -1,6 +1,6 @@
 <?php
 
-namespace Magepow\SizeChart\Model\System\Config;
+namespace Magepow\Sizechart\Model\System\Config;
 
 class Category implements \Magento\Framework\Option\ArrayInterface
 {

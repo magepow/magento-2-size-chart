@@ -1,6 +1,6 @@
 <?php
 
-namespace Magepow\SizeChart\Block\Adminhtml\SizeChart;
+namespace Magepow\Sizechart\Block\Adminhtml\Sizechart;
 
 class AddRow extends \Magento\Backend\Block\Widget\Form\Container
 {
@@ -19,10 +19,10 @@ class AddRow extends \Magento\Backend\Block\Widget\Form\Container
     protected function _construct()
     {
         $this->_objectId = 'row_id';
-        $this->_blockGroup = 'Magepow_SizeChart';
-        $this->_controller = 'adminhtml_sizeChart';
+        $this->_blockGroup = 'Magepow_Sizechart';
+        $this->_controller = 'adminhtml_sizechart';
         parent::_construct();
-        if ($this->_isAllowedAction('Magepow_SizeChart::add_row')) {
+        if ($this->_isAllowedAction('Magepow_Sizechart::add_row')) {
             $this->buttonList->update('save', 'label', __('Save'));
             $this->buttonList->add(
             'saveandcontinue',
