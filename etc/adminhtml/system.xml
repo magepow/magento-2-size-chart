@@ -15,7 +15,7 @@
                     <label>Module Enable</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="display_text" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" sshowInStore="1" canRestore="1">
+                <field id="display_text" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="1" canRestore="1">
                     <label>Display Text Link</label>
                     
                     <comment>This text will display the link for showing popup sizechart</comment>
