@@ -3,7 +3,7 @@ var config = {
          'sizechart': "Magepow_Sizechart/js/popup"
       },   
     shim: {
-    'sizecharts': {
+    'sizechart': {
         deps: ['jquery']
     }
   }
