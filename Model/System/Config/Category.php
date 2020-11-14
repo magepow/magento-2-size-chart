@@ -49,7 +49,7 @@ class Category implements \Magento\Framework\Option\ArrayInterface
                 $categories = array(array('value' => $rootCategoryId, 'label' => $label));
             }
             $options = array();
-            // $options[] = array('label' => __('All'), 'value' => array(array('label' => __('All'), 'value' => '0')));
+          
             foreach ($categories as $category) {
                 $this->_options = array();
                 if($category['value']) {
@@ -64,8 +64,7 @@ class Category implements \Magento\Framework\Option\ArrayInterface
                             );
                             if ($_category->hasChildren()) $this->_getChildOptions($_category->getChildren());
                         }
-                        // $rootOption['value'] = $this->_options;
-                        // $options[] = $rootOption;
+                        
                         if($this->_options){
                             $options[] = array(
                                 'label' => $category['label'],

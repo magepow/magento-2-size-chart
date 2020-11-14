@@ -48,10 +48,7 @@ class Category extends Generic implements TabInterface
                 ['legend' => __('Add Category Rule'), 'class' => 'fieldset-wide']
             );
         }
-       //  $fieldset->addType(
-       //  'categories',
-       //  '\Magento\Catalog\Block\Adminhtml\Product\Helper\Form\Category'
-       // );
+      
  
         $category = $fieldset->addField('category', 'multiselect',
             [
@@ -63,15 +60,7 @@ class Category extends Generic implements TabInterface
                 'note' => 'Please follow stricly this rule to make sure you size chart shows up on frontend: Level 2 -> level 3 -> level 4. For example: Women -> Tops -> Jackets.'
             ]
         );
-// $fieldset->addField(
-//         'category',
-//         'categories',
-//         [
-//             'name' => 'category',
-//             'label' => __('Category'),
-//             'title' => __('Category')
-//         ]
-//     );
+
         
        
 

@@ -34,5 +34,4 @@ namespace Magepow\Sizechart\Api\Data;
 
 
 
-  
 }

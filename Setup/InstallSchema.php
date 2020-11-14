@@ -83,23 +83,7 @@ class InstallSchema implements InstallSchemaInterface
                 'Creation Time'
             );
         }
-        // $installer->getConnection()->createTable($table);
-//            $installer->getConnection()->addIndex(
-//                $installer->getTable('crud_news_post'),
-//                $setup->getIdxName(
-//                    $installer->getTable('crud_news_post'),
-//                    ['name', 'url_key', 'post_content'],
-//                    AdapterInterface::INDEX_TYPE_FULLTEXT
-//                ),
-//                [
-//                    'name',
-//
-//                    'url_key',
-//                    'post_content',
-//
-//                ],
-//                AdapterInterface::INDEX_TYPE_FULLTEXT
-//            );
+  
         $installer->getConnection()->createTable($table);
         $installer->endSetup();
     }

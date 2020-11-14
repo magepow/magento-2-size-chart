@@ -33,12 +33,7 @@ class Sizechart extends \Magento\Framework\View\Element\Template
 		$sizechart = $collection->getCollection()->addFieldToFilter('is_active',1);
  		 return $sizechart;
 }
-public function getCacheLifetime()
-    {
-        return null;
-    }
 
-    
 public function getClass($item){
 	$type = $item->getTypeDisplay();
 	if($type == 1){
@@ -65,46 +60,12 @@ public function getClass($item){
         return $this->_registry->registry('current_category');
     }
    
-//    public function getParentCategories(){
-//     if(!$this->getCurrentCategory){
-//     foreach ($this->getCurrentCategory()->getParentCategories() as $parent) {
-//        return ( $parent->getId());
-//        return ($parent->getName());
-//     }
-//    }else{
-//     return false;
-//    }
-// }
-    // public function getLevelParentCategory(){
-    //     if($this->getCurrentCategory()){
-    //         if($this->getCurrentCategory()->getParentCategories()){
-    //             foreach ($this->getCurrentCategory()->getParentCategories() as $parent) {             
-    //                    return $parent->getId();
-                    
-    //             }
-    //         }else{
-    //             return false;
-    //         }
-    //     }
-       
-    // }
+
     public function getCurrentProduct()
     {        
         return $this->_registry->registry('current_product');
     }    
-// public function getCurrentCategoryParent(){
-//     $categoryIds =  $this->getCurrentProduct()->getCategoryIds();
-//     $relativeCategory = $categoryIds[0];
-//     $category = $this->getCategory($relativeCategory);
-//     $categoryIdCurrentProduct = $category->getId();
-//     $categoryArray = array($categoryIdCurrentProduct);
-//     return $categoryArray;
-    
-// }
-// public function sayHello()
-//     {
-//         return __('Hello World');
-//     }
+
   public function getMedia($img=null)
     {
         $urlMedia = $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);

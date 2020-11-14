@@ -43,7 +43,7 @@ class AddRow extends \Magento\Backend\Block\Widget\Form\Container
         } else {
             $this->buttonList->remove('save');
         }
-        // $this->buttonList->remove('reset');
+        
        
     }
 
