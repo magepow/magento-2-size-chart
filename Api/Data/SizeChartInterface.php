@@ -31,4 +31,8 @@ namespace Magepow\Sizechart\Api\Data;
   public function setUpdatedAt($updatedAt);
   public function getCreatedAt();
   public function setCreatedAt($createdAt);
+
+
+
+  
 }
