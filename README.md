@@ -57,7 +57,7 @@ php bin/magento setup:static-content:deploy -f
    
   ### 3. Result
    
-   ![Image of magento store front](https://github.com/magepow/magento2-layerednav/blob/master/media/result.PNG)
+   ![Image of magento store front](https://github.com/magepow/magento2-sizechart/blob/master/media/result.png)
    
  ## Donation
 
@@ -118,5 +118,5 @@ If this project help you reduce time to develop, you can give me a cup of coffee
 
 * [Hire Magento Developer](https://alothemes.com/hire-magento-developer.html)
 
-[![Latest Stable Version](https://poser.pugx.org/magepow/layerednav/v/stable)](https://packagist.org/packages/magepow/layerednav)
-[![Total Downloads](https://poser.pugx.org/magepow/layerednav/downloads)](https://packagist.org/packages/magepow/layerednav)
+[![Latest Stable Version](https://poser.pugx.org/magepow/sizechart/v/stable)](https://packagist.org/packages/magepow/sizechart)
+[![Total Downloads](https://poser.pugx.org/magepow/sizechart/downloads)](https://packagist.org/packages/magepow/sizechart)
