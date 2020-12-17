@@ -25,24 +25,39 @@ php bin/magento setup:static-content:deploy -f
 
   Login to magento admin, choose `stores->configuration->magepow->Sizechart`
   
-  ![Image of magento admin config](https://github.com/magepow/magento2-layerednav/blob/master/media/config_backend.PNG)
+  ![Image of magento admin config](https://github.com/magepow/magento2-sizechart/blob/master/media/config.png)
 
   Select `yes` to enable the module
   
   ### 2. Details Configuration
   
-   In `stores->configuration->magepow->layered ajax` we set: 
-   * Use range price slider : Select `yes` to enable the price range and `no` to turn to the price of magento default.
-   * Show all filters : Select `yes` to show the filter of all the options and `no` to disable the feature
-   
+   In `stores->configuration->magepow->sizechart` we set: 
+   * Display text link : Show text link if user sets popup for displaying size chart.
+   * Image icon : Select image icon (only using when user sets popup for displaying size chart)
+    ![Image of magento backend](https://github.com/magepow/magento2-sizechart/blob/master/media/config-popup.png)
+   ### 3. Add Sizechart
+   Choose `Magepow->Size chart Management->Add New Size Chart Rule`.
+   ![Image of magento backend](https://github.com/magepow/magento2-sizechart/blob/master/media/add-content1.png)
+   ![Image of magento backend](https://github.com/magepow/magento2-sizechart/blob/master/media/add-content2.png)
+   ![Image of magento backend](https://github.com/magepow/magento2-sizechart/blob/master/media/add-content3.png)
+   ### 4. Edit Sizechart
+   ![Image of magento backend](https://github.com/magepow/magento2-sizechart/blob/master/media/edit.png)
+   ### 5. Delete Sizechart
+   ![Image of magento backend](https://github.com/magepow/magento2-sizechart/blob/master/media/delete.png)
+   ### 6. Product Rule
+   Choose `Catalog->Product->Edit->Size Chart` on product you want to add rule
+    ![Image of magento backend](https://github.com/magepow/magento2-sizechart/blob/master/media/rule_product.png)
+    This part is used for the priority of size chart. The rule on this part will be prioritized to show. This is for prevent the conflict when multiple rule are applied on one product or rally of products.
+    
    Run the following command:
    
    ```
    php bin/magento cache:clean
    ```
+   
   ### 3. Result
    
-   ![Image of magento store front](https://github.com/magepow/magento2-layerednav/blob/master/media/result_frontend.PNG)
+   ![Image of magento store front](https://github.com/magepow/magento2-layerednav/blob/master/media/result.PNG)
    
  ## Donation
 
