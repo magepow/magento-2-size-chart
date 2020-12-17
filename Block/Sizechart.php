@@ -1,76 +1,102 @@
 <?php
 namespace Magepow\Sizechart\Block;
-use Magento\Catalog\Model\CategoryFactory;
+class SizeChart extends \Magento\Framework\View\Element\Template
 
-class Sizechart extends \Magento\Framework\View\Element\Template
-{
-    
-	protected $_sizechartFactory;
-	protected $_registry;
-	protected $_categoryFactory;
-	protected $category;
+{ 
+    protected $_productCollectionFactory;
 
-	public function __construct(\Magento\Framework\View\Element\Template\Context $context,
-		\Magepow\Sizechart\Model\SizechartFactory $sizechartFactory,
-		 \Magento\Store\Model\StoreManagerInterface $storeManager,
-		 \Magento\Framework\Registry $registry,
-		 CategoryFactory $categoryFactory,
+    protected $_productVisibility;
+    protected $_sizechartFactory;
+    protected $_parameters;
+    protected $_ruleFactory;
+    protected $_stockConfig;
+    protected $sqlBuilder;
+    protected $_stockFilter;
+
+    public function __construct(
+        \Magento\Framework\View\Element\Template\Context $context, 
+        \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
+         \Magento\CatalogWidget\Model\RuleFactory $ruleFactory,
+         \Magento\CatalogInventory\Helper\Stock $stockFilter,
+        \Magento\CatalogInventory\Model\Configuration $stockConfig,
+         \Magento\Rule\Model\Condition\Sql\Builder $sqlBuilder,
+        \Magento\Catalog\Model\Product\Visibility $productVisibility,
+         \Magepow\Sizechart\Model\SizechartFactory $sizechartFactory,
         array $data = []
-	)
-	{
-      
-		$this->_registry = $registry;
-		$this->_categoryFactory = $categoryFactory;
-		$this->_sizechartFactory = $sizechartFactory;
-		$this->storeManager = $storeManager;
-		 
-		parent::__construct($context);
-	}
+    ) {
+        $this->_productCollectionFactory = $productCollectionFactory; 
+        $this->_productVisibility = $productVisibility; 
+        $this->_sizechartFactory = $sizechartFactory;
+        $this->_ruleFactory = $ruleFactory;
+        $this->sqlBuilder   = $sqlBuilder;
+         $this->_stockFilter = $stockFilter;
+        $this->_stockConfig = $stockConfig;
+        parent::__construct($context, $data);
+    }
 
-	public function getSizeChartCollection(){
-	
-		$collection = $this->_sizechartFactory->create();
-		$sizechart = $collection->getCollection()->addFieldToFilter('is_active',1);
- 		 return $sizechart;
-}
+    public function getProductCollection() {
+        $collection = $this->_productCollectionFactory->create();
+        $collection->addAttributeToSelect('*');
 
-public function getClass($item){
-	$type = $item->getTypeDisplay();
-	if($type == 1){
-	return 'sizechart-inline';
-	}elseif($type == 2){
-	return 'sizechart-popup';
-	}else{
-		return 'sizechart-custom';
-	}
-	
-}
+        // filter current website products
+        $collection->addWebsiteFilter();
 
- 
-    public function getCategory($categoryId)
+        $collection->addAttributeToSort('entity_id','desc');
+
+        // filter current store products
+        $collection->addStoreFilter();
+
+        // set visibility filter
+        $collection->setVisibility($this->_productVisibility->getVisibleInSiteIds());
+
+        // fetching only 5 products
+
+        return $collection;
+    }
+     public function getWidgetCfg($cfg=null)
     {
-        $this->category = $this->_categoryFactory->create();
-        $this->category->load($categoryId);
-        return $this->category;
-    }
-    
-    
-     public function getCurrentCategory()
-    {        
-        return $this->_registry->registry('current_category');
-    }
-   
+    $collection = $this->_sizechartFactory->create();
+     $sizechart = $collection->getCollection()->addFieldToFilter('is_active',1);
+    foreach ($sizechart as $value) {
 
-    public function getCurrentProduct()
-    {        
-        return $this->_registry->registry('current_product');
-    }    
+    	$config = $value->getConditionsSerialized();
+    	$data = @unserialize($config);
+    	$this->_parameters = $data['parameters'];
+    	return ($this->_parameters);	
 
-  public function getMedia($img=null)
+    }
+
+        
+    }
+    protected function getRule($conditions)
     {
-        $urlMedia = $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
-        if($img) return $urlMedia . "magepow/sizechart/" . $img;
-        return $urlMedia;
+        $rule = $this->_ruleFactory->create();
+        if(is_array($conditions)) $rule->loadPost($conditions);
+        return $rule; 
     }
-	
+    public function getLoadedProductCollection()
+    {
+        $this->_limit = (int) $this->getWidgetCfg();
+        // $type = $this->getTypeFilter();
+        // $fn = 'get' . ucfirst($type) . 'Products';
+        $collection = $this->getLatestProducts();
+        $parameters = $this->_parameters;
+        if($parameters){
+            $rule = $this->getRule($parameters);
+            $conditions = $rule->getConditions();
+            $conditions->collectValidatedAttributes($collection);
+            $this->sqlBuilder->attachConditionToCollection($collection, $conditions);
+        }
+        if ($this->_stockConfig->isShowOutOfStock() != 1) {
+            $this->_stockFilter->addInStockFilterToCollection($collection);
+        }
+        $this->_eventManager->dispatch(
+            'catalog_block_product_list_collection',
+            ['collection' => $collection]
+        );
+        $page = $this->getRequest()->getPost('p', 1);
+        return $collection->setCurPage($page);
+     
+    }
+
 }

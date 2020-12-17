@@ -1,39 +1,36 @@
- <?php
+
+<?php
+
 $helper = $this->helper('Magepow\Sizechart\Helper\Data');
 $isEnabled =  $helper->getConfigModule('general/enabled'); 
+if($isEnabled){
 $isTextLinkDisplayed = $helper->getConfigModule('general/display_text');
 $iconImage   = $helper->getConfigModule('general/image_icon');
 $iconImageShow = $block->getMedia($iconImage);
-$product = $block->getCurrentProduct();
-$categoryIds = $product->getCategoryIds();
-$relativeCategory = $categoryIds[0];
-$category = $this->getCategory($relativeCategory);
-$categoryIdCurrentProduct = $category->getId();
-$categoryArray = array($categoryIdCurrentProduct);
+ $productCollection = $block->getConfig(); 
+ $typeDisplay = $productCollection['type_display'];
+ $name = $productCollection['name'];
+ $description = $productCollection['description'];
+ $sizechartInfo = $productCollection['sizechart_info'];
+  $currentProductId = $block->getCurrentProduct()->getId();
+  
 
+//   foreach ($currentProductId as $attribute) {
+//      print_r($attribute->getFrontendLabel()->getValue());
+// }
+// //print_r($currentProductId);
+        
+  $productArrayId = array($currentProductId);
+ $_productCollection = $block->getLoadedProductCollection();
+
+	foreach ($_productCollection as $value) {
+	$arrayProduct = $value->getData();
+	if(array_intersect($productArrayId, $arrayProduct)){
+	
   ?>
-
- <?php 
- if($isEnabled){
   
-   
- foreach ($block->getSizeChartCollection() as $item) {
- 	
-  $categoryIdAdmin = $item->getCategory();
-  $categoryId = explode(",",$categoryIdAdmin);
-  // print_r($categoryId);
-  
-   if(array_intersect($categoryArray, $categoryId)){
-  //    print_r(array_intersect($categoryArray, $categoryId));
-  // }else{
-  //   echo "string";
-  // }
-
-  
- ?>
-  
- <div class="sizechart">
- 	<?php if($item->getTypeDisplay() == 2) { ?>
+  <div class="sizechart">
+ 	<?php if($typeDisplay == 2) { ?>
  		<div data-mage-init='{"sizechart": {}}'>
      		 <div class="sizechart-display">
             <img src="<?php echo $iconImageShow; ?>" alt="this is image icon"> 
@@ -43,15 +40,15 @@ $categoryArray = array($categoryIdCurrentProduct);
         <?php 
     }
         ?>
-     <div class="<?php echo $this->getClass($item);?>"> 
+     <div class="<?php echo $block->getClass($typeDisplay);?>"> 
      	
-         <h2 class="sizechart-name"><?php echo $item->getName();?></h2>
+         <h2 class="sizechart-name"><?php echo $name;?></h2>
         <div class="info">
-            <p class="des"><?php echo $item->getDescription(); ?></p>
+            <p class="des"><?php echo $description; ?></p>
 
         </div>
         <div class="sizechart-digram">
-            <?php echo $item->getSizechartInfo();?>
+            <?php echo $sizechartInfo;?>
         </div> 
 
      </div> 
@@ -59,9 +56,9 @@ $categoryArray = array($categoryIdCurrentProduct);
   </div> 
   <?php 
  }
-     }
- }
+ 
+}
+}
+     
 
   ?>
- 
-  

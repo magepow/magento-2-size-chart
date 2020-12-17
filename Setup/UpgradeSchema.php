@@ -29,5 +29,28 @@ class UpgradeSchema implements UpgradeSchemaInterface
 
             }
             }
+            if (version_compare($context->getVersion(), '2.2.0', '<')) {
+                if ($setup->getConnection()->isTableExists($tableName) == true){
+                $connection = $setup->getConnection();
+                $connection->addColumn(
+                    $setup->getTable($tableName),'conditions_serialized',['type' => Table::TYPE_TEXT,
+                        'length' => '2M',
+                        'nullable' => false,
+                         'comment'=>'Conditions Serialized']
+                );
+            }
     }
+    if (version_compare($context->getVersion(), '2.3.0', '<')) {
+                if ($setup->getConnection()->isTableExists($tableName) == true){
+                $connection = $setup->getConnection();
+                $connection->addColumn(
+                    $setup->getTable($tableName),'stores',['type' => Table::TYPE_TEXT,
+                        'length' => '2M',
+                        'nullable' => false,
+                         'comment'=>'Store Views']
+                );
+            }
+    }
+
+}
 }

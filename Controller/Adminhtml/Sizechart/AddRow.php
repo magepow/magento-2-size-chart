@@ -21,10 +21,12 @@ class AddRow extends \Magento\Backend\App\Action
     public function execute()
     {
         $rowId = (int) $this->getRequest()->getParam('id');
+        $storeViewId = $this->getRequest()->getParam('store');
         $rowData = $this->sizechartFactory->create();
 
         if ($rowId) {
-            $rowData = $rowData->load($rowId);
+            // $rowData->setStoreViewId($storeViewId)->load($rowId);
+            $rowData = $rowData->setStoreViewId($storeViewId)->load($rowId);
 
             $rowTitle = $rowData->getTitle();
             if (!$rowData->getEntityId()) {
@@ -32,6 +34,14 @@ class AddRow extends \Magento\Backend\App\Action
                 $this->_redirect('magepow_sizechart/sizechart/rowdata');
 
                 return ;
+             }
+             else{
+                $tmp = @unserialize($rowData->getConditionsSerialized());
+                if(is_array($tmp)){
+                    unset($tmp['form_key']);
+                    unset($tmp['entity_id']);
+                    $rowData->addData($tmp);
+                }
             }
         }
 

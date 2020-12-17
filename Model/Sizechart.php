@@ -13,6 +13,17 @@ class Sizechart extends \Magento\Framework\Model\AbstractModel implements Sizech
 	{
 		$this->_init('Magepow\Sizechart\Model\ResourceModel\Sizechart');
 	}
+    public function getColumns($entityId) {
+        $data = $this->load($entityId)->getData();
+        unset($data['entity_id']);
+        unset($data['name']);
+        $newData = array();
+        foreach ($data as $value){
+            $valueString = trim($value);
+            $newData[] = explode(',', $valueString);
+        }
+        return $newData;
+    }
 
 	public function getIdentities()
 	{
@@ -79,5 +90,23 @@ class Sizechart extends \Magento\Framework\Model\AbstractModel implements Sizech
     }
     public function setIsActive($isActive){
         return $this->setData(self::IS_ACTIVE,$isActive);
+    }
+    public function getTemplateCss(){
+        return $this->getData(self::TEMPLATE_CSS);
+    }
+    public function setTemplateCss($templateCss){
+        return $this->setData(self::TEMPLATE_CSS,$templateCss);
+    }
+    public function getConditions(){
+        return $this->getData(self::CONDITIONS);
+    }
+    public function setConditions($conditions){
+        return $this->setData(self::CONDITIONS, $conditions);
+    }
+    public function getStoreView(){
+        return $this->getData(self::STORES);
+    }
+    public function setStoreView($stores){
+        return $this->setData(self::STORES, $stores);
     }
 }

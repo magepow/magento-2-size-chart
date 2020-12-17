@@ -1,6 +1,6 @@
 <?php
 
-namespace Magepow\Sizechart\Block\Adminhtml\SizeChart\Edit\Tab;
+namespace Magepow\Sizechart\Block\Adminhtml\Sizechart\Edit\Tab;
 
 use Magento\Backend\Block\Widget\Form\Generic;
 use Magento\Backend\Block\Widget\Tab\TabInterface;
@@ -9,25 +9,27 @@ class Main extends Generic implements TabInterface
 {
 
 
-    protected $_objectManager;
     protected $_systemStore;
+    protected $_objectManager;
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
         \Magento\Framework\Registry $registry,
          \Magento\Cms\Model\Wysiwyg\Config $wysiwygConfig,
         \Magento\Framework\Data\FormFactory $formFactory,
-        \Magento\Store\Model\System\Store $systemStore,
         \Magento\Framework\ObjectManagerInterface $objectManager,
         \Magepow\Sizechart\Model\Status $options,
+        \Magento\Store\Model\System\Store $systemStore,
         \Magepow\Sizechart\Model\TypeDisplay $typeDisplay,
         array $data = []
     ) {
-      
+
+        $this->_systemStore = $systemStore;
         $this->_options = $options;
         $this->_wysiwygConfig = $wysiwygConfig;
         $this->_typeDisplay = $typeDisplay;
         $this->_systemStore = $systemStore;
-        $this->_objectManager = $objectManager;
+        $this->_objectManager = $context->getStoreManager();
+
         parent::__construct($context, $registry, $formFactory, $data);
     }
     protected function _prepareForm()
@@ -63,7 +65,30 @@ class Main extends Generic implements TabInterface
             ]
         );
 
-        
+        if (!$this->_storeManager->isSingleStoreMode()) {
+            $field = $fieldset->addField(
+                'stores',
+                'multiselect',
+                [
+                    'name' => 'stores[]',
+                    'label' => __('Store View'),
+                    'title' => __('Store View'),
+                    'required' => true,
+                    'values' => $this->_systemStore->getStoreValuesForForm(false, true)
+                ]
+            );
+            $renderer = $this->getLayout()->createBlock(
+                'Magento\Backend\Block\Store\Switcher\Form\Renderer\Fieldset\Element'
+            );
+            $field->setRenderer($renderer);
+        } else {
+            $fieldset->addField(
+                'stores',
+                'hidden',
+                ['name' => 'stores[]', 'value' => $this->_storeManager->getStore(true)->getId()]
+            );
+            $model->setStoreId($this->_storeManager->getStore(true)->getId());
+        }
        
          $fieldset->addField(
             'description',
@@ -133,22 +158,22 @@ class Main extends Generic implements TabInterface
 
             ]
         );
-        $fieldset->addField(
-            'updated_at',
-            'date',
-            [
-                'name' => 'updated_at',
-                'label' => __('Updated At'),
-                'date_format' => $dateFormat,
-                'time_format' => 'HH:mm:ss',
-                'class' => 'validate-date validate-date-range date-range-custom_theme-from',
-                'style' => 'width:200px',
-                'required'=>false,
-                'disabled'=>false,
+        // $fieldset->addField(
+        //     'updated_at',
+        //     'date',
+        //     [
+        //         'name' => 'updated_at',
+        //         'label' => __('Updated At'),
+        //         'date_format' => $dateFormat,
+        //         'time_format' => 'HH:mm:ss',
+        //         'class' => 'validate-date validate-date-range date-range-custom_theme-from',
+        //         'style' => 'width:200px',
+        //         'required'=>false,
+        //         'disabled'=>false,
 
 
-            ]
-        );
+        //     ]
+        // );
          
 
         $form->setValues($model->getData());

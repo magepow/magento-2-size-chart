@@ -7,7 +7,7 @@ require(["jquery", "Magento_Ui/js/modal/modal"],function($, modal) {
                 text: $.mage.__('Close'),
                 class: '',
                 click: function () {
-                    this.closeModal(); 
+                    this.closeModal(); // This button closes the modal
                 }
             }]
         };

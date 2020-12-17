@@ -7,6 +7,7 @@
             </argument>
         </arguments>
     </type>
+  
     <virtualType name="Magepow\Sizechart\Model\ResourceModel\Sizechart\Grid\Collection" 
         type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>

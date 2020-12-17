@@ -1,20 +1,19 @@
 <?php
 
 namespace Magepow\Sizechart\Controller\Adminhtml\Sizechart;
-
+//Magento\Backend\App\Action
 
 class Save extends \Magento\Backend\App\Action
 {
-
-    var $childFactory;
-
-
+    protected $_sizechartFactory;
     public function __construct(
-        \Magento\Backend\App\Action\Context $context
+        \Magento\Backend\App\Action\Context $context,
+        \Magepow\Sizechart\Model\SizechartFactory $sizechartFactory
 
     )
     {
         parent::__construct($context);
+        $this->_sizechartFactory = $sizechartFactory;
 
     }
 
@@ -27,44 +26,60 @@ class Save extends \Magento\Backend\App\Action
         $resultRedirect = $this->resultRedirectFactory->create();
         // check if data sent
         $data = $this->getRequest()->getPostValue();
-        // print_r($data);
+      //  print_r (serialize($data));
         // exit();
      
         if ($data) {
-            $id = $this->getRequest()->getParam('entity_id');
-            $model = $this->_objectManager->create('Magepow\Sizechart\Model\Sizechart')->load($id);
-            if (!$model->getId() && $id) {
-                $this->messageManager->addError(__('This item no longer exists.'));
-                return $resultRedirect->setPath('*/*/');
+    $id = $this->getRequest()->getParam('entity_id');
+    $model = $this->_sizechartFactory->create();
+    $storeViewId = $this->getRequest()->getParam('store');
+    $model->load($id);
+    if (!$model->getId() && $id) {
+     $this->messageManager->addError(__('This item no longer exists.'));
+        return $resultRedirect->setPath('*/*/');
             }
             
             if (isset($data['category'])){
+
                 $data['category'] = implode(',', $data['category']);
-                // $data['category'] = $data['category_id'];         
+                // $data['category'] = $data['category_id']; 
+
                      
             }
-       
-            // if ($data['menu_type'] == 0) {
-            //     $data['category_id'] = 0;
-            //     $data['sub_category'] = $data['top_content'] = $data['bottom_content'] = '';
-            // } else {
-            //     $data['static_content'] = '';
-            // }
+               $data['conditions_serialized'] = serialize($data);
+              
+                // $data['type_id'] = 1;
+                // print_r($data['type_id']);
+              
+             if(isset($data['stores'])) $data['stores'] = implode(',', $data['stores']);
+             $model->setData($data)->setStoreViewId($storeViewId);;
 
-//            if (!isset($data['stores'])) {
-//                $data['stores'] = null;
-//            }
+        //     if(isset($data['rule'])){
+        // $dataArray['conditions'] = $this->serialize($data['rule']['conditions']);
+        //     }
+    // if(array_key_exists('conditions_serialized',$data))$data['conditions_serialized']=implode(',',$data['conditions_serialized']);
+            
+              // $data['conditions_serialized'] = 'a:1:{s:10:"conditions";'.serialize($data['parameters']['conditions']).'}';
+                 // print_r( $data['conditions_serialized']);
+ 
+                // if (array_key_exists('conditions_serialized', $data)) {
+                  // print_r($data['conditions_serialized']);
+                  // exit();
 
             // init model and set data
 
-            $model->setData($data);
+            
+
 
             // try to save it
             try {
+                // $model->loadPost($model->getData());
                 // save the data
                 $model->save();
                 // display success message
                 $this->messageManager->addSuccess(__('You saved the item.'));
+                // $this->_getSession()->setFormData(false);
+
 
                 if ($this->getRequest()->getParam('back')) {
                     $this->_redirect('*/*/addrow', ['id' => $model->getId(), '_current' => true]);
@@ -85,4 +100,11 @@ class Save extends \Magento\Backend\App\Action
         }
         return $resultRedirect->setPath('*/*/index');
     }
+    // protected function prepareData($data)
+    // {
+       
+    //     $data['conditions_serialized'] = 'a:1:{s:10:"conditions";'.serialize($data['parameters']['conditions_serialized']).'}';
+    //     $data['display_item'] = 'a:1:{s:10:"conditions";'.serialize($data['parameters']['conditions_item']).'}';
+    //     return $data;
+    // }
 }

@@ -13,6 +13,9 @@ namespace Magepow\Sizechart\Api\Data;
   const SIZECHART_INFO = 'sizechart_info';
   const UPDATED_AT = 'updated_at';
   const CREATED_AT = 'created_at';
+  const TEMPLATE_CSS = 'template_css';
+   const CONDITIONS = 'conditions_serialized';
+    const STORE = 'stores';
   public function getEntityId();
   public function setEntityId($entityId);
   public function getCategoryId();
@@ -31,7 +34,10 @@ namespace Magepow\Sizechart\Api\Data;
   public function setUpdatedAt($updatedAt);
   public function getCreatedAt();
   public function setCreatedAt($createdAt);
-
-
-
+  public function getTemplateCss();
+  public function setTemplateCss($templateCss);
+  public function getConditions();
+  public function setConditions($conditions);
+   public function getStoreView();
+   public function setStoreView($stores);
 }

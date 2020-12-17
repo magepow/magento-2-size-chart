@@ -82,9 +82,11 @@ class InstallSchema implements InstallSchemaInterface
    				 ['nullable' => false, 'default' => \Magento\Framework\DB\Ddl\Table::TIMESTAMP_INIT],
                 'Creation Time'
             );
+             $installer->getConnection()->createTable($table);
         }
-  
-        $installer->getConnection()->createTable($table);
+       
         $installer->endSetup();
+       
+        
     }
 }
