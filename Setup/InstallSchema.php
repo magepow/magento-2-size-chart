@@ -29,7 +29,13 @@ class InstallSchema implements InstallSchemaInterface
                 'primary' => true
             ],
             'ENTITY ID'
-        )
+        ) ->addColumn(
+                'name',
+                 Table::TYPE_TEXT,
+                 '2M',
+                  [],
+                 'Name'
+            )
             ->addColumn(
                'category',
                  Table::TYPE_TEXT,
@@ -67,7 +73,8 @@ class InstallSchema implements InstallSchemaInterface
                 '2M',
                 [],
                 'Size Chart Information'
-            )
+            )->addColumn('conditions_serialized', Table::TYPE_TEXT, '2M', [], 
+            'Conditions Serialized')
             ->addColumn(
                 'updated_at',
                 \Magento\Framework\DB\Ddl\Table::TYPE_TIMESTAMP,
