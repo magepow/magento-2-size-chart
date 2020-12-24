@@ -75,6 +75,8 @@ class InstallSchema implements InstallSchemaInterface
                 'Size Chart Information'
             )->addColumn('conditions_serialized', Table::TYPE_TEXT, '2M', [], 
             'Conditions Serialized')
+            ->addColumn('sort_order', Table::TYPE_INTEGER, null, [ 'nullable' => false,], 
+            'Sort Order')
             ->addColumn(
                 'updated_at',
                 \Magento\Framework\DB\Ddl\Table::TYPE_TIMESTAMP,

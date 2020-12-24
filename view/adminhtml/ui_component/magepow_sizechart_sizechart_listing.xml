@@ -92,6 +92,15 @@
                 </item>
             </argument>
         </column>
+         <column name="sort_order">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">textRange</item>
+                    <item name="sorting" xsi:type="string">asc</item>
+                    <item name="label" xsi:type="string" translate="true">Sort Order</item>
+                </item>
+            </argument>
+        </column>
         <column name="description">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">

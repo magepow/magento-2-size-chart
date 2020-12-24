@@ -1,4 +1,5 @@
 require(["jquery", "Magento_Ui/js/modal/modal"],function($, modal) {
+
         var options = {
             type: 'popup', // popup or slide
             responsive: true, // true = on smaller screens the modal slides in from the right
@@ -14,6 +15,7 @@ require(["jquery", "Magento_Ui/js/modal/modal"],function($, modal) {
 
         var popup = modal(options, $('.sizechart-popup'));
         $(".sizechart-display").click(function() {
+            'use strict';
             $('.sizechart-popup').modal('openModal');
         });
     });

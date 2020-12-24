@@ -30,7 +30,9 @@ $iconImageShow = $block->getMedia($iconImage);
   ?>
   
   <div class="sizechart">
- 	<?php if($typeDisplay == 2) { ?>
+ 	<?php 
+  
+  if($typeDisplay == 2) { ?>
  		<div data-mage-init='{"sizechart": {}}'>
      		 <div class="sizechart-display">
             <img src="<?php echo $iconImageShow; ?>" alt="this is image icon"> 
@@ -39,7 +41,10 @@ $iconImageShow = $block->getMedia($iconImage);
        </div>
         <?php 
     }
+     
+      
         ?>
+      
      <div class="<?php echo $block->getClass($typeDisplay);?>"> 
      	
          <h2 class="sizechart-name"><?php echo $name;?></h2>
@@ -55,7 +60,8 @@ $iconImageShow = $block->getMedia($iconImage);
     
   </div> 
   <?php 
- }
+ 
+}
  
 }
 }

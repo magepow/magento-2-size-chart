@@ -32,7 +32,7 @@ class Save extends \Magento\Backend\App\Action
         if ($data) {
     $id = $this->getRequest()->getParam('entity_id');
     $model = $this->_sizechartFactory->create();
-    $storeViewId = $this->getRequest()->getParam('store');
+    $storeViewId = $this->getRequest()->getParam('stores');
     $model->load($id);
     if (!$model->getId() && $id) {
      $this->messageManager->addError(__('This item no longer exists.'));

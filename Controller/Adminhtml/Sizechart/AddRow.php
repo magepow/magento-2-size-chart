@@ -21,7 +21,7 @@ class AddRow extends \Magento\Backend\App\Action
     public function execute()
     {
         $rowId = (int) $this->getRequest()->getParam('id');
-        $storeViewId = $this->getRequest()->getParam('store');
+        $storeViewId = $this->getRequest()->getParam('stores');
         $rowData = $this->sizechartFactory->create();
 
         if ($rowId) {

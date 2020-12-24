@@ -118,19 +118,21 @@ class Sizechart extends \Magento\Catalog\Block\Product\AbstractProduct
 
    public function getConfig(){
                 $currentProductAttribute = $this->getCurrentProduct()->getSizechartManagement();
-                $item = $this->_sizechartFactory->create();
-if ($currentProductAttribute == '') {
+                $store_id = $this->getCurrentProduct()->getStoreId();
+             
+        $item = $this->_sizechartFactory->create();
+        if ($currentProductAttribute == '') {
                       $collection = $item->getCollection()->addFieldToSelect('conditions_serialized')
-                                ->addFieldToFilter('is_active', 1);
+                                ->addFieldToFilter('is_active', 1)->addFieldToFilter('stores',array( array('finset' => 0), array('finset' => $store_id)))->setOrder('sort_order','DESC');
                                 foreach ($collection as $value) {
                                   $config = $value ->getConditionsSerialized();
                                    $data = @unserialize($config);
                                    
                                 }
                                 $this->_parameters =  $data['parameters'];
+                                
                 }else{
-                $collection = $item->getCollection()->addFieldToSelect('conditions_serialized')->addFieldToFilter('entity_id',$currentProductAttribute)
-                                ->addFieldToFilter('is_active', 1);
+                $collection = $item->getCollection()->addFieldToSelect('conditions_serialized')->addFieldToFilter('entity_id',$currentProductAttribute)->addFieldToFilter('is_active', 1)->addFieldToFilter('stores',array( array('finset' => 0), array('finset' => $store_id)))->setOrder('sort_order','DESC');
                                 foreach ($collection as $value) {
                                   $config = $value ->getConditionsSerialized();
                                    $data = @unserialize($config);
@@ -147,11 +149,11 @@ if ($currentProductAttribute == '') {
   return 'sizechart-inline';
   }elseif($typeDisplay == 2){
  return 'sizechart-popup';
+  }else{
+  	return 'sizechart-customtab';
   }
   
 }
-
-   
 
   public function array_replace_key($search, $replace, array $subject) {
     $updatedArray = [];
@@ -171,8 +173,6 @@ if ($currentProductAttribute == '') {
     public function getLoadedProductCollection()
     {
         $this->_limit = (int) $this->getSizeChartCollection();
-        // $type = $this->getTypeFilter();
-        // $fn = 'get' . ucfirst($type) . 'Products';
         $collection = $this->getProducts();
         $parameters = $this->_parameters;
         if($parameters){

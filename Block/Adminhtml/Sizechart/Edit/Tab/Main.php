@@ -103,6 +103,7 @@ class Main extends Generic implements TabInterface
                 'required' => false,
             ]
         );
+         
          //['tab_id' => $this->getTabId()]
         $wysiwygConfig = $this->_wysiwygConfig->getConfig();
             $fieldset->addField(
@@ -113,6 +114,17 @@ class Main extends Generic implements TabInterface
                 'label' => __('Size Chart Information'),
                 'required' => true,
                 'config' => $wysiwygConfig
+            ]
+        );
+            $fieldset->addField(
+            'sort_order',
+            'text',
+            [
+                'name' => 'sort_order',
+                'label' => __('Sort Order'),
+                'id' => 'sort_order',
+                'title' => __('Sort Order'),
+                'required' => true,
             ]
         );
              $fieldset->addField(
@@ -142,22 +154,23 @@ class Main extends Generic implements TabInterface
                 'required' => true,
             ]
         );
-        $fieldset->addField(
-            'created_at',
-            'date',
-            [
-                'name' => 'created_at',
-                'label' => __('Created At'),
-                'date_format' => $dateFormat,
-                'time_format' => 'HH:mm:ss',
-                'class' => 'validate-date validate-date-range date-range-custom_theme-from',
-                'style' => 'width:200px',
-                 'required'=>false,
-                'disabled'=>false,
+
+        // $fieldset->addField(
+        //     'created_at',
+        //     'date',
+        //     [
+        //         'name' => 'created_at',
+        //         'label' => __('Created At'),
+        //         'date_format' => $dateFormat,
+        //         'time_format' => 'HH:mm:ss',
+        //         'class' => 'validate-date validate-date-range date-range-custom_theme-from',
+        //         'style' => 'width:200px',
+        //          'required'=>false,
+        //         'disabled'=>false,
 
 
-            ]
-        );
+        //     ]
+        // );
         // $fieldset->addField(
         //     'updated_at',
         //     'date',

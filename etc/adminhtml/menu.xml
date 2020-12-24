@@ -2,7 +2,7 @@
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
-    	<update id="magepow" title="Magepow" module="Magepow_InfiniteScroll" sortOrder="10" resource="Magepow_InfiniteScroll::magepow" />
+    	<update id="magepow" title="Magepow" module="Magepow_Sizechart" sortOrder="10" resource="Magepow_Sizechart::magepow" />
     	 <add id="Magepow_Sizechart::magepow" title="Size Chart" module="Magepow_Sizechart" sortOrder="10" parent="magepow" resource="Magepow_Sizechart::magepow" />
        <!--  <add id="magepow" title="Magepow" module="Magepow_Sizechart"  sortOrder="10" resource="Magepow_Sizechart::magepow" /> -->
         <add id="Magepow_Sizechart::sizechart" title="Size Chart Management" module="Magepow_Sizechart" parent="Magepow_Sizechart::magepow" sortOrder="20" action="magepow_sizechart/sizechart" resource="Magepow_Sizechart::sizechart"/>
