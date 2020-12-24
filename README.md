@@ -40,6 +40,15 @@ php bin/magento setup:static-content:deploy -f
    ![Image of magento backend](https://github.com/magepow/magento2-sizechart/blob/master/media/add-content1.png)
    ![Image of magento backend](https://github.com/magepow/magento2-sizechart/blob/master/media/add-content2.png)
    ![Image of magento backend](https://github.com/magepow/magento2-sizechart/blob/master/media/add-content3.png)
+   
+   * Name: Name of your size chart management rule
+   * Store View : Define which store view you wish to show
+   * Description : Introduce about your size chart
+   * Size chart Information : Details about your size chart : you can write your diagram, image as you want
+   * Sort order : This part is used for the priority. If there is any rule have the same information. then the one which lower number will have the higher priority.
+   * Type Display : You can choose 3 types of displaying included: Inline, Custom Tab, Popup.
+   * Status: Select Enable/Disable for turning on/off the size chart rule.
+   
    ### 4. Edit Sizechart
    ![Image of magento backend](https://github.com/magepow/magento2-sizechart/blob/master/media/edit.png)
    ### 5. Delete Sizechart
