@@ -1,4 +1,4 @@
-# Magento 2 Sizechart
+# Magento 2 Size Chart
 
 Magento 2 Sizechart is a module allows admin to show their size chart diagram below product images on product page which helps customers choose the most suitable size for them.
 
