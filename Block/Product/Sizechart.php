@@ -115,10 +115,11 @@ class Sizechart extends \Magento\Catalog\Block\Product\AbstractProduct
             'cache_tags' => [\Magento\Catalog\Model\Product::CACHE_TAG,
             ], ]);
     }
-
+//>addFieldToFilter('stores',array( array('finset' => 0), array('finset' => $store_id)))->
    public function getConfig(){
                 $currentProductAttribute = $this->getCurrentProduct()->getSizechartManagement();
                 $store_id = $this->getCurrentProduct()->getStoreId();
+
              
         $item = $this->_sizechartFactory->create();
         if ($currentProductAttribute == '') {
@@ -126,19 +127,21 @@ class Sizechart extends \Magento\Catalog\Block\Product\AbstractProduct
                                 ->addFieldToFilter('is_active', 1)->addFieldToFilter('stores',array( array('finset' => 0), array('finset' => $store_id)))->setOrder('sort_order','DESC');
                                 foreach ($collection as $value) {
                                   $config = $value ->getConditionsSerialized();
-                                   $data = @unserialize($config);
+                                   $data = @unserialize($config); 
                                    
+                                   $this->_parameters =  $data['parameters'];                              
                                 }
-                                $this->_parameters =  $data['parameters'];
+                                
                                 
                 }else{
                 $collection = $item->getCollection()->addFieldToSelect('conditions_serialized')->addFieldToFilter('entity_id',$currentProductAttribute)->addFieldToFilter('is_active', 1)->addFieldToFilter('stores',array( array('finset' => 0), array('finset' => $store_id)))->setOrder('sort_order','DESC');
                                 foreach ($collection as $value) {
                                   $config = $value ->getConditionsSerialized();
                                    $data = @unserialize($config);
+                                   $this->_parameters =  $data['parameters'];
                                    
                                 }
-                                $this->_parameters =  $data['parameters'];
+                                
                 
                }
               
