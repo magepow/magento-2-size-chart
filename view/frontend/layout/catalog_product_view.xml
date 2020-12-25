@@ -10,7 +10,7 @@
  
      <block class="Magepow\Sizechart\Block\Product\Sizechart" name="sizechart" 
      	after="product.info.addtocart"
-template="Magepow_Sizechart::sizechart.phtml">
+template="Magepow_Sizechart::sizechart.phtml" cacheable="false">
   	 
      </block>
  </referenceContainer>
