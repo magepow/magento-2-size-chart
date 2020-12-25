@@ -129,9 +129,10 @@ class Sizechart extends \Magento\Catalog\Block\Product\AbstractProduct
                                   $config = $value ->getConditionsSerialized();
                                    $data = @unserialize($config); 
                                    
-                                   $this->_parameters =  $data['parameters'];                              
+                                   $this->_parameters =  $data['parameters'];   
+                                   return $data;                            
                                 }
-                                  return $data; 
+                                  
                                 
                 }else{
                 $collection = $item->getCollection()->addFieldToSelect('conditions_serialized')->addFieldToFilter('entity_id',$currentProductAttribute)->addFieldToFilter('is_active', 1)->addFieldToFilter('stores',array( array('finset' => 0), array('finset' => $store_id)))->setOrder('sort_order','DESC');
@@ -139,12 +140,12 @@ class Sizechart extends \Magento\Catalog\Block\Product\AbstractProduct
                                   $config = $value ->getConditionsSerialized();
                                    $data = @unserialize($config);
                                    $this->_parameters =  $data['parameters'];
-                                   
+                                   return $data; 
                                 }
-                          return $data;       
+                                
                 
                }
-                return $data; 
+                // return $data; 
               
            
  }
