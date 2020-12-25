@@ -131,7 +131,7 @@ class Sizechart extends \Magento\Catalog\Block\Product\AbstractProduct
                                    
                                    $this->_parameters =  $data['parameters'];                              
                                 }
-                                
+                                  return $data; 
                                 
                 }else{
                 $collection = $item->getCollection()->addFieldToSelect('conditions_serialized')->addFieldToFilter('entity_id',$currentProductAttribute)->addFieldToFilter('is_active', 1)->addFieldToFilter('stores',array( array('finset' => 0), array('finset' => $store_id)))->setOrder('sort_order','DESC');
@@ -141,11 +141,12 @@ class Sizechart extends \Magento\Catalog\Block\Product\AbstractProduct
                                    $this->_parameters =  $data['parameters'];
                                    
                                 }
-                                
+                          return $data;       
                 
                }
+                return $data; 
               
-            return $data;
+           
  }
  public function getClass($typeDisplay){
   if($typeDisplay == 1){
@@ -153,7 +154,7 @@ class Sizechart extends \Magento\Catalog\Block\Product\AbstractProduct
   }elseif($typeDisplay == 2){
  return 'sizechart-popup';
   }else{
-  	return 'sizechart-customtab';
+    return 'sizechart-customtab';
   }
   
 }
