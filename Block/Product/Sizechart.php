@@ -68,6 +68,8 @@ class Sizechart extends \Magento\Catalog\Block\Product\AbstractProduct
     protected $_parameters; // Condition Product
     protected $_request;
     protected $_abstractProduct;
+    protected $json;
+    protected $_filter;
    
     /**
      * @param Context $context
@@ -90,6 +92,8 @@ class Sizechart extends \Magento\Catalog\Block\Product\AbstractProduct
         \Magento\CatalogWidget\Model\RuleFactory $ruleFactory,
         \Magento\Rule\Model\Condition\Sql\Builder $sqlBuilder,
           \Magepow\Sizechart\Model\SizechartFactory $sizechartFactory,
+          \Magepow\Sizechart\Serialize\Serializer\Json $json,
+          \Magento\Cms\Model\Template\FilterProvider $filter,
         array $data = []
     ) {
          $this->storeManager = $storeManager;
@@ -103,6 +107,8 @@ class Sizechart extends \Magento\Catalog\Block\Product\AbstractProduct
         $this->_stockConfig = $stockConfig;
         $this->_ruleFactory = $ruleFactory;
         $this->sqlBuilder   = $sqlBuilder;
+        $this->_filter = $filter;
+        $this->json = $json;
         $this->_sizechartFactory = $sizechartFactory;
         parent::__construct( $context, $data );
         
@@ -116,39 +122,27 @@ class Sizechart extends \Magento\Catalog\Block\Product\AbstractProduct
             ], ]);
     }
 //>addFieldToFilter('stores',array( array('finset' => 0), array('finset' => $store_id)))->
+    //->setOrder('sort_order','DESC')
    public function getConfig(){
-                $currentProductAttribute = $this->getCurrentProduct()->getSizechartManagement();
+                
                 $store_id = $this->getCurrentProduct()->getStoreId();
 
-             
-        $item = $this->_sizechartFactory->create();
-        if ($currentProductAttribute == '') {
-                      $collection = $item->getCollection()->addFieldToSelect('conditions_serialized')
-                                ->addFieldToFilter('is_active', 1)->addFieldToFilter('stores',array( array('finset' => 0), array('finset' => $store_id)))->setOrder('sort_order','DESC');
+             	$item = $this->_sizechartFactory->create();
+                $collection = $item->getCollection()->addFieldToSelect('conditions_serialized')->addFieldToFilter('is_active', 1)->addFieldToFilter('stores',array( array('finset' => 0), array('finset' => $store_id)))->setOrder('sort_order','DESC');
                                 foreach ($collection as $value) {
                                   $config = $value ->getConditionsSerialized();
-                                   $data = @unserialize($config); 
-                                   
-                                   $this->_parameters =  $data['parameters'];   
-                                   return $data;                            
-                                }
-                                  
-                                
-                }else{
-                $collection = $item->getCollection()->addFieldToSelect('conditions_serialized')->addFieldToFilter('entity_id',$currentProductAttribute)->addFieldToFilter('is_active', 1)->addFieldToFilter('stores',array( array('finset' => 0), array('finset' => $store_id)))->setOrder('sort_order','DESC');
-                                foreach ($collection as $value) {
-                                  $config = $value ->getConditionsSerialized();
-                                   $data = @unserialize($config);
+                                   $data = $this->json->unserialize($config);
                                    $this->_parameters =  $data['parameters'];
                                    return $data; 
                                 }
-                                
-                
-               }
+                                 }
                 // return $data; 
               
-           
- }
+    public function getContentFromStaticBlock($content)
+{
+    return $this->_filter->getBlockFilter()->filter($content);
+}
+ 
  public function getClass($typeDisplay){
   if($typeDisplay == 1){
   return 'sizechart-inline';
@@ -177,7 +171,7 @@ class Sizechart extends \Magento\Catalog\Block\Product\AbstractProduct
 }
     public function getLoadedProductCollection()
     {
-        $this->_limit = (int) $this->getSizeChartCollection();
+        $this->_limit = (int) $this->getConfig();
         $collection = $this->getProducts();
         $parameters = $this->_parameters;
         if($parameters){

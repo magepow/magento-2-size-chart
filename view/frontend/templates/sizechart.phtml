@@ -25,8 +25,11 @@ $iconImageShow = $block->getMedia($iconImage);
 
 	foreach ($_productCollection as $value) {
 	$arrayProduct = $value->getData();
+
 	if(array_intersect($productArrayId, $arrayProduct)){
-	
+	//print_r(array_intersect($productArrayId, $arrayProduct));
+    
+
   ?>
   
   <div class="sizechart">
@@ -53,7 +56,7 @@ $iconImageShow = $block->getMedia($iconImage);
 
         </div>
         <div class="sizechart-digram">
-            <?php echo $sizechartInfo;?>
+            <?php echo $block->getContentFromStaticBlock($sizechartInfo);?>
         </div> 
 
      </div> 

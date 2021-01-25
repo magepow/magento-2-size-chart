@@ -105,7 +105,7 @@ class Main extends Generic implements TabInterface
         );
          
          //['tab_id' => $this->getTabId()]
-        $wysiwygConfig = $this->_wysiwygConfig->getConfig();
+        $wysiwygConfig = $this->_wysiwygConfig->getConfig(['tab_id' => $this->getTabId()]);
             $fieldset->addField(
             'sizechart_info',
             'editor',

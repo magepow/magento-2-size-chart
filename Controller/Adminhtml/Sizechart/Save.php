@@ -16,7 +16,15 @@ class Save extends \Magento\Backend\App\Action
         $this->_sizechartFactory = $sizechartFactory;
 
     }
-
+ public function serialize($data)
+ {
+    
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $serializer = $objectManager->create(\Magento\Framework\Serialize\SerializerInterface::class);
+        return $serializer->serialize($data);
+    
+     
+}
     /**
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      * @SuppressWarnings(PHPMD.NPathComplexity)
@@ -46,7 +54,7 @@ class Save extends \Magento\Backend\App\Action
 
                      
             }
-               $data['conditions_serialized'] = serialize($data);
+               $data['conditions_serialized'] = $this->serialize($data);
               
                 // $data['type_id'] = 1;
                 // print_r($data['type_id']);

@@ -9,15 +9,26 @@ class AddRow extends \Magento\Backend\App\Action
 {
        private $coreRegistry;
     private $sizechartFactory;
+    protected $json;
 
     public function __construct(\Magento\Backend\App\Action\Context $context, \Magento\Framework\Registry $coreRegistry,
-        \Magepow\Sizechart\Model\SizechartFactory $sizechartFactory
+        \Magepow\Sizechart\Model\SizechartFactory $sizechartFactory,
+        \Magepow\Sizechart\Serialize\Serializer\Json $json
     ) {
         parent::__construct($context);
         $this->coreRegistry = $coreRegistry;
         $this->sizechartFactory = $sizechartFactory;
+        $this->json = $json;
     }
-
+//   public function unserialize($data)
+//  {
+    
+//         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+//         $serializer = $objectManager->create(\Magento\Framework\Serialize\Serializer\Json::class);
+//         return $serializer->unserialize($data);
+    
+     
+// }
     public function execute()
     {
         $rowId = (int) $this->getRequest()->getParam('id');
@@ -36,7 +47,7 @@ class AddRow extends \Magento\Backend\App\Action
                 return ;
              }
              else{
-                $tmp = @unserialize($rowData->getConditionsSerialized());
+                $tmp = $this->json->unserialize($rowData->getConditionsSerialized());
                 if(is_array($tmp)){
                     unset($tmp['form_key']);
                     unset($tmp['entity_id']);

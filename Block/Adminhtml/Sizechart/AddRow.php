@@ -37,7 +37,7 @@ class AddRow extends \Magento\Backend\Block\Widget\Form\Container
                         ]
                     ]
                 ]
-            ],
+            ]
         );
             
         } else {

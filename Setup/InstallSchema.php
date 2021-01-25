@@ -92,6 +92,17 @@ class InstallSchema implements InstallSchemaInterface
                 'Creation Time'
             );
              $installer->getConnection()->createTable($table);
+             $installer->getConnection()->addIndex(
+                $installer->getTable('sizechart_management'),
+                $setup->getIdxName(
+                    $installer->getTable('sizechart_management'),
+                    ['name', 'description','sizechart_info'],
+                    \Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_FULLTEXT
+                ),
+                ['name', 'description','sizechart_info'],
+                \Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_FULLTEXT
+            );
+        
         }
        
         $installer->endSetup();
