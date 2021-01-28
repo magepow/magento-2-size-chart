@@ -55,7 +55,7 @@ php bin/magento setup:static-content:deploy -f
    ### 6. Product Rule
    Choose `Magepow->Size chart Management->Add New Size Chart Rule` and set number for sort order
     
-    This part is used for the priority of size chart. The rule on this part will be prioritized to show. This is for prevent the conflict when multiple rule are applied on one product or rally of products.
+   This part is used for the priority of size chart. The rule on this part will be prioritized to show. This is for prevent the conflict when multiple rule are applied on one product or rally of products.
     
    Run the following command:
    
