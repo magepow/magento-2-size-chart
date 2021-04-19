@@ -42,18 +42,6 @@
         <exportButton name="export_button"/>
         <filters name="listing_filters" />
         <filterSearch name="fulltext"/>
-        <argument name="data" xsi:type="array">
-            <item name="config" xsi:type="array">
-                <item name="component" xsi:type="string">Magento_Ui/js/grid/search/search</item>
-                <item name="displayArea" xsi:type="string">dataGridFilters</item>
-                <item name="provider" xsi:type="string">magepow_sizechart_sizechart_listing.magepow_sizechart_sizechart_listing_data_source</item>
-                <item name="chipsProvider" xsi:type="string">magepow_sizechart_sizechart_listing.magepow_sizechart_sizechart_listing.listing_top.listing_filters_chips</item>
-                <item name="storageConfig" xsi:type="array">
-                    <item name="provider" xsi:type="string">magepow_sizechart_sizechart_listing.magepow_sizechart_sizechart_listing.listing_top.bookmarks</item>
-                    <item name="namespace" xsi:type="string">current.search</item>
-                </item>
-            </item>
-        </argument>
         
         <massaction name="listing_massaction">
             <argument name="data" xsi:type="array">
