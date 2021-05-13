@@ -6,7 +6,10 @@ Magento 2 Sizechart is a module allows admin to show their size chart diagram be
 Before you continue, ensure you meet the following requirements:
 
   * You have installed Magento2
-  * You should use a Linux or Mac OS machine. Windows is not currently supported.
+
+[![Latest Stable Version](https://poser.pugx.org/magepow/sizechart/v/stable)](https://packagist.org/packages/magepow/sizechart)
+[![Total Downloads](https://poser.pugx.org/magepow/sizechart/downloads)](https://packagist.org/packages/magepow/sizechart)
+[![Daily Downloads](https://poser.pugx.org/magepow/sizechart/d/daily)](https://packagist.org/packages/magepow/sizechart)
 
 ## Step 1 : Download Magento 2 Sizechart Extension
 ### Install via composer (recommend)
