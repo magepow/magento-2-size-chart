@@ -1,17 +1,34 @@
-# Magento 2 Size Chart
+## Magento 2 Size Chart
 
 Magento 2 Sizechart is a module allows admin to show their size chart diagram below product images on product page which helps customers choose the most suitable size for them.
 
+Displaying exact product sizes on the website makes it easy for customers to choose the right product for their needs.
 
-Before you continue, ensure you meet the following requirements:
+Product size will vary depending on the brand, each country. Therefore, adding a product-specific size chart on your e-commerce website is essential.
 
-  * You have installed Magento2
+### Benefits
+
+- Create size chart according to product characteristics: clothes, shoes, electronic devices, furniture, accessories...
+
+- Show size chart inline, custom tab, popup.
+
+- Add linked text, images or labels.
+
+- Save time for the project
+
+- Apply precedence rule to size chart
+
+- Manage size rules in the backend
+
+- Avoid customers returning products due to size problems
+
+- Works well on mobile devices
 
 [![Latest Stable Version](https://poser.pugx.org/magepow/sizechart/v/stable)](https://packagist.org/packages/magepow/sizechart)
 [![Total Downloads](https://poser.pugx.org/magepow/sizechart/downloads)](https://packagist.org/packages/magepow/sizechart)
 [![Daily Downloads](https://poser.pugx.org/magepow/sizechart/d/daily)](https://packagist.org/packages/magepow/sizechart)
 
-## Step 1 : Download Magento 2 Sizechart Extension
+## Download Magento 2 Sizechart Extension
 ### Install via composer (recommend)
 Run the following commands in Magento 2 root folder:
 ```
