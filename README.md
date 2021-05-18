@@ -24,6 +24,12 @@ Product size will vary depending on the brand, each country. Therefore, adding a
 
 - Works well on mobile devices
 
+## How does Site Chart work for Magento
+
+- Detail Description: [Magento 2 Size Chart](https://magepow.com/magento-2-size-chart.html)
+
+- [DOCUMENTATION](https://docs.magepow.com/sizechart/)
+
 [![Latest Stable Version](https://poser.pugx.org/magepow/sizechart/v/stable)](https://packagist.org/packages/magepow/sizechart)
 [![Total Downloads](https://poser.pugx.org/magepow/sizechart/downloads)](https://packagist.org/packages/magepow/sizechart)
 [![Daily Downloads](https://poser.pugx.org/magepow/sizechart/d/daily)](https://packagist.org/packages/magepow/sizechart)
