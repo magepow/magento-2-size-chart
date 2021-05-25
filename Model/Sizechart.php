@@ -13,17 +13,7 @@ class Sizechart extends \Magento\Framework\Model\AbstractModel implements Sizech
 	{
 		$this->_init('Magepow\Sizechart\Model\ResourceModel\Sizechart');
 	}
-    // public function getColumns($entityId) {
-    //     $data = $this->load($entityId)->getData();
-    //     unset($data['entity_id']);
-    //     unset($data['name']);
-    //     $newData = array();
-    //     foreach ($data as $value){
-    //         $valueString = trim($value);
-    //         $newData[] = explode(',', $valueString);
-    //     }
-    //     return $newData;
-    // }
+   
 
 	public function getIdentities()
 	{

@@ -42,18 +42,7 @@ class Category extends Generic implements TabInterface
         $model = $this->_coreRegistry->registry('row_data');
         $form = $this->_formFactory->create();
         $form->setHtmlIdPrefix('wkgrid_');
-        // if ($model->getEntityId()) {
-        //     $fieldset = $form->addFieldset(
-        //         'base_fieldset',
-        //         ['legend' => __('Edit Category Rule'), 'class' => 'fieldset-wide']
-        //     );
-        //     $fieldset->addField('entity_id', 'hidden', ['name' => 'entity_id']);
-        // } else {
-        //     $fieldset = $form->addFieldset(
-        //         'base_fieldset',
-        //         ['legend' => __('Add Category Rule'), 'class' => 'fieldset-wide']
-        //     );
-        // }
+       
         $fieldsetId = 'conditions_fieldset';
         $formName = 'catalog_rule_form';
 
@@ -78,31 +67,7 @@ class Category extends Generic implements TabInterface
             ->setNewChildUrl($newChildUrl)
             ->setFieldSetId($fieldsetId);
 
-       //  $fieldset->addType(
-       //  'categories',
-       //  '\Magento\Catalog\Block\Adminhtml\Product\Helper\Form\Category'
-       // );
- 
-       //  $category = $fieldset->addField('category', 'multiselect',
-       //      [
-       //          'label' => __('Categories'),
-       //          'title' => __('Categories'),
-       //          'name'  => 'category',
-       //          'required' => true,
-       //          'values' => $this->_category->toOptionArray(),
-       //          'note' => 'Please follow stricly this rule to make sure you size chart shows up on frontend: Level 2 -> level 3 -> level 4. For example: Women -> Tops -> Jackets.'
-       //      ]
-       //  );
-        
-// $fieldset->addField(
-//         'category',
-//         'categories',
-//         [
-//             'name' => 'category',
-//             'label' => __('Category'),
-//             'title' => __('Category')
-//         ]
-//     );
+  
         $fieldset = $form->addFieldset(
             $fieldsetId,
             ['legend' => __('Conditions (don\'t add conditions if rule is applied to all products)')]

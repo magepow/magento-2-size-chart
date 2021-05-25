@@ -25,10 +25,7 @@ class Save extends \Magento\Backend\App\Action
     
      
 }
-    /**
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
-     * @SuppressWarnings(PHPMD.NPathComplexity)
-     */
+    
     public function execute()
     {
         $resultRedirect = $this->resultRedirectFactory->create();
@@ -56,23 +53,12 @@ class Save extends \Magento\Backend\App\Action
             }
                $data['conditions_serialized'] = $this->serialize($data);
               
-                // $data['type_id'] = 1;
-                // print_r($data['type_id']);
+              
               
              if(isset($data['stores'])) $data['stores'] = implode(',', $data['stores']);
              $model->setData($data)->setStoreViewId($storeViewId);;
 
-        //     if(isset($data['rule'])){
-        // $dataArray['conditions'] = $this->serialize($data['rule']['conditions']);
-        //     }
-    // if(array_key_exists('conditions_serialized',$data))$data['conditions_serialized']=implode(',',$data['conditions_serialized']);
-            
-              // $data['conditions_serialized'] = 'a:1:{s:10:"conditions";'.serialize($data['parameters']['conditions']).'}';
-                 // print_r( $data['conditions_serialized']);
- 
-                // if (array_key_exists('conditions_serialized', $data)) {
-                  // print_r($data['conditions_serialized']);
-                  // exit();
+      
 
             // init model and set data
 
@@ -108,11 +94,5 @@ class Save extends \Magento\Backend\App\Action
         }
         return $resultRedirect->setPath('*/*/index');
     }
-    // protected function prepareData($data)
-    // {
-       
-    //     $data['conditions_serialized'] = 'a:1:{s:10:"conditions";'.serialize($data['parameters']['conditions_serialized']).'}';
-    //     $data['display_item'] = 'a:1:{s:10:"conditions";'.serialize($data['parameters']['conditions_item']).'}';
-    //     return $data;
-    // }
+    
 }

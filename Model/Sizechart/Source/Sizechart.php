@@ -1,12 +1,6 @@
 <?php
 
-/**
- * Copyright © 2016 ExtensionsMall. All rights reserved.
- * See COPYING.txt for license details.
- */
-/**
- * Source model for eav attribute custom_design
- */
+
 
 namespace Magepow\Sizechart\Model\Sizechart\Source;
 

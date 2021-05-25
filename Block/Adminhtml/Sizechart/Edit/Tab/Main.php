@@ -155,39 +155,7 @@ class Main extends Generic implements TabInterface
             ]
         );
 
-        // $fieldset->addField(
-        //     'created_at',
-        //     'date',
-        //     [
-        //         'name' => 'created_at',
-        //         'label' => __('Created At'),
-        //         'date_format' => $dateFormat,
-        //         'time_format' => 'HH:mm:ss',
-        //         'class' => 'validate-date validate-date-range date-range-custom_theme-from',
-        //         'style' => 'width:200px',
-        //          'required'=>false,
-        //         'disabled'=>false,
 
-
-        //     ]
-        // );
-        // $fieldset->addField(
-        //     'updated_at',
-        //     'date',
-        //     [
-        //         'name' => 'updated_at',
-        //         'label' => __('Updated At'),
-        //         'date_format' => $dateFormat,
-        //         'time_format' => 'HH:mm:ss',
-        //         'class' => 'validate-date validate-date-range date-range-custom_theme-from',
-        //         'style' => 'width:200px',
-        //         'required'=>false,
-        //         'disabled'=>false,
-
-
-        //     ]
-        // );
-         
 
         $form->setValues($model->getData());
         $this->setForm($form);

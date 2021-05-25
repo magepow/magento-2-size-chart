@@ -20,15 +20,7 @@ class AddRow extends \Magento\Backend\App\Action
         $this->sizechartFactory = $sizechartFactory;
         $this->json = $json;
     }
-//   public function unserialize($data)
-//  {
-    
-//         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-//         $serializer = $objectManager->create(\Magento\Framework\Serialize\Serializer\Json::class);
-//         return $serializer->unserialize($data);
-    
-     
-// }
+
     public function execute()
     {
         $rowId = (int) $this->getRequest()->getParam('id');
