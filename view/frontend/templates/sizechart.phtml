@@ -1,50 +1,33 @@
 
 <?php
-
-$helper = $this->helper('Magepow\Sizechart\Helper\Data');
-
+$sizeChart = $block->getSizeChart();
+// var_dump($sizeChart);die('sdf');
+if(!$sizeChart) return;
+$helper    = $this->helper('Magepow\Sizechart\Helper\Data');
 $isTextLinkDisplayed = $helper->getConfigModule('general/display_text');
 $iconImage   = $helper->getConfigModule('general/image_icon');
 $iconImageShow = $block->getMedia($iconImage);
-$productCollection = $block->getConfig(); 
-$typeDisplay = $productCollection['type_display'];
-$name = $productCollection['name'];
-$description = $productCollection['description'];
-$sizechartInfo = $productCollection['sizechart_info'];
-$currentProductId = $block->getCurrentProduct()->getId();
-        
-$productArrayId = array($currentProductId);
-$_productCollection = $block->getLoadedProductCollection();
-
-foreach ($_productCollection as $value) {
-  $arrayProduct = $value->getData();
-	if(array_intersect($productArrayId, $arrayProduct)){    
+$typeDisplay = $sizeChart->getData('type_display');
+$name = $sizeChart->getData('name');
+$description = $sizeChart->getData('description');
+$sizechartInfo = $sizeChart->getData('sizechart_info');
 ?>
-  
-    <div class="sizechart">
-     	<?php if($typeDisplay == 2) : ?>
-    		<div data-mage-init='{"sizechart": {}}'>
-       		 <div class="sizechart-display">
-              <img src="<?php echo $iconImageShow; ?>" alt="this is image icon"> 
-             <a href = "#" class="textlink"><?php echo $isTextLinkDisplayed; ?></a>
-          </div>
-         </div>
-      <?php endif; ?>
-        
-      <div class="<?php echo $block->getClass($typeDisplay);?>"> 
-        <h2 class="sizechart-name"><?php echo $name;?></h2>
-          <div class="info">
-              <div class="des"><?php echo $description; ?></div>
-          </div>
-          <div class="sizechart-digram">
-            <?php echo $block->getContentFromStaticBlock($sizechartInfo);?>
-          </div> 
+<div class="sizechart">
+  <?php if($typeDisplay == 2) : ?>
+    <div data-mage-init='{"sizechart": {}}'>
+       <div class="sizechart-display">
+          <img src="<?php echo $iconImageShow; ?>" alt="this is image icon"> 
+         <a href="#" class="textlink"><?php echo $isTextLinkDisplayed; ?></a>
+      </div>
+     </div>
+  <?php endif; ?>
+  <div class="<?php echo $block->getClass($typeDisplay);?>"> 
+    <h2 class="sizechart-name"><?php echo $name;?></h2>
+      <div class="info">
+          <div class="des"><?php echo $description; ?></div>
+      </div>
+      <div class="sizechart-digram">
+        <?php echo $block->getContentFromStaticBlock($sizechartInfo);?>
       </div> 
-    </div> 
-  <?php 
-
-  }
- 
-}
-
-?>
+  </div> 
+</div>

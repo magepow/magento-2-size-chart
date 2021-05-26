@@ -5,51 +5,6 @@ namespace Magepow\Sizechart\Block\Product;
 class Sizechart extends \Magento\Catalog\Block\Product\AbstractProduct
 {
 
-    protected $sqlBuilder;
-
-    protected $_productRepository;
-
-    protected $_registry;
-    /**
-     * @var \Magento\Framework\Url\Helper\Data
-     */
-    protected $urlHelper;
-
-    /**
-     *
-     * @var \Magento\Store\Model\StoreManagerInterface
-     */
-    protected $_objectManager;
-
-    /**
-     * Catalog product visibility
-     *
-     * @var \Magento\Catalog\Model\Product\Visibility
-     */
-    protected $_catalogProductVisibility;
-
-    /**
-     * @var _stockconfig
-     */
-    protected $_stockConfig;
-
-    /**
-     * @var \Magento\CatalogInventory\Helper\Stock
-     */
-    protected $_stockFilter;
-
-    /**
-     * Product collection factory
-     *
-     * @var \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory
-     */
-    protected $_productCollectionFactory;
-
-    /**
-     * @var CategoryRepositoryInterface
-     */
-    protected $categoryRepository;
-
     /**
      * Product collection factory
      *
@@ -80,65 +35,57 @@ class Sizechart extends \Magento\Catalog\Block\Product\AbstractProduct
      * @param array $data
      */
     public function __construct(
-        \Magento\Catalog\Block\Product\AbstractProduct $abstractProduct,
         \Magento\Catalog\Block\Product\Context $context,
-        \Magento\Framework\Url\Helper\Data $urlHelper,
-        \Magento\Framework\ObjectManagerInterface $objectManager,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Magento\Catalog\Api\CategoryRepositoryInterface $categoryRepository,
-        \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
-        \Magento\Catalog\Model\Product\Visibility $catalogProductVisibility,
-        \Magento\CatalogInventory\Helper\Stock $stockFilter,
-        \Magento\CatalogInventory\Model\Configuration $stockConfig,
         \Magento\CatalogWidget\Model\RuleFactory $ruleFactory,
-        \Magento\Rule\Model\Condition\Sql\Builder $sqlBuilder,
         \Magepow\Sizechart\Model\SizechartFactory $sizechartFactory,
         \Magepow\Sizechart\Serialize\Serializer\Json $json,
         \Magento\Cms\Model\Template\FilterProvider $filter,
         array $data = []
     ) {
-        $this->storeManager = $storeManager;
-        $this->_abstractProduct = $abstractProduct;
-        $this->urlHelper = $urlHelper;
-        $this->_objectManager = $objectManager;
-        $this->categoryRepository = $categoryRepository;
-        $this->_productCollectionFactory = $productCollectionFactory;
-        $this->_catalogProductVisibility = $catalogProductVisibility;
-        $this->_stockFilter = $stockFilter;
-        $this->_stockConfig = $stockConfig;
         $this->_ruleFactory = $ruleFactory;
-        $this->sqlBuilder   = $sqlBuilder;
         $this->_filter = $filter;
         $this->json = $json;
         $this->_sizechartFactory = $sizechartFactory;
         parent::__construct($context, $data);
     }
-    protected function _construct()
+
+    public function getSizeChartCollection()
     {
-        parent::_construct();
-        $this->addData([
-            'cache_lifetime' => false,
-            'cache_tags' => [
-                \Magento\Catalog\Model\Product::CACHE_TAG,
-            ],
-        ]);
+        $store = $this->_storeManager->getStore()->getStoreId();;
+
+        $collection = $this->_sizechartFactory->create()->getCollection()
+                        ->addFieldToSelect('*')
+                        ->addFieldToFilter('is_active', 1)
+                        ->addFieldToFilter('stores', array(array('finset' => 0), array('finset' => $store)))
+                        ->setOrder('sort_order', 'ASC');
+
+        return $collection;
     }
 
-    public function getConfig()
+    public function getSizeChart()
     {
+        if(!$this->hasData('size_chart')) {
 
-        $store_id = $this->getCurrentProduct()->getStoreId();
+            $collection = $this->getSizeChartCollection();
+            $product    = $this->getProduct();
+            $sizeChart  = '';
+            foreach ($collection as $item) {
+                $config = $item->getConditionsSerialized();
+                $data = $this->json->unserialize($config);
+                $parameters =  $data['parameters'];
+                $rule = $this->getRule($parameters);
+                $validate = $rule->getConditions()->validate($product);
+                if($validate){
+                    $sizeChart = $item;
+                    break;
+                }
+            }
 
-        $item = $this->_sizechartFactory->create();
-        $collection = $item->getCollection()->addFieldToSelect('conditions_serialized')->addFieldToFilter('is_active', 1)->addFieldToFilter('stores', array(array('finset' => 0), array('finset' => $store_id)))->setOrder('sort_order', 'DESC');
-        foreach ($collection as $value) {
-            $config = $value->getConditionsSerialized();
-            $data = $this->json->unserialize($config);
-            $this->_parameters =  $data['parameters'];
-            return $data;
+            $this->setData('size_chart', $sizeChart);
         }
+
+        return $this->getData('size_chart');
     }
-    // return $data; 
 
     public function getContentFromStaticBlock($content)
     {
@@ -147,53 +94,15 @@ class Sizechart extends \Magento\Catalog\Block\Product\AbstractProduct
 
     public function getClass($typeDisplay)
     {
+        $type = 'sizechart-customtab';
         if ($typeDisplay == 1) {
-            return 'sizechart-inline';
+            $type = 'sizechart-inline';
         } elseif ($typeDisplay == 2) {
-            return 'sizechart-popup';
-        } else {
-            return 'sizechart-customtab';
-        }
+            $type = 'sizechart-popup';
+        } 
+
+        return $type;
     }
-
-    public function array_replace_key($search, $replace, array $subject)
-    {
-        $updatedArray = [];
-
-        foreach ($subject as $key => $value) {
-            if (!is_array($value) && $key == $search) {
-                $updatedArray = array_merge($updatedArray, [$replace => $value]);
-
-                continue;
-            }
-
-            $updatedArray = array_merge($updatedArray, [$key => $value]);
-        }
-
-        return $updatedArray;
-    }
-    public function getLoadedProductCollection()
-    {
-        $this->_limit = (int) $this->getConfig();
-        $collection = $this->getProducts();
-        $parameters = $this->_parameters;
-        if ($parameters) {
-            $rule = $this->getRule($parameters);
-            $conditions = $rule->getConditions();
-            $conditions->collectValidatedAttributes($collection);
-            $this->sqlBuilder->attachConditionToCollection($collection, $conditions);
-        }
-        if ($this->_stockConfig->isShowOutOfStock() != 1) {
-            $this->_stockFilter->addInStockFilterToCollection($collection);
-        }
-        $this->_eventManager->dispatch(
-            'catalog_block_product_list_collection',
-            ['collection' => $collection]
-        );
-        $page = $this->getRequest()->getPost('p', 1);
-        return $collection->setCurPage($page);
-    }
-
 
     protected function getRule($conditions)
     {
@@ -201,26 +110,11 @@ class Sizechart extends \Magento\Catalog\Block\Product\AbstractProduct
         if (is_array($conditions)) $rule->loadPost($conditions);
         return $rule;
     }
-    public function getCurrentProduct()
-    {
-        $product = $this->_abstractProduct->getProduct();
-        return $product;
-    }
 
-    public function getProducts()
-    {
 
-        $collection = $this->_productCollectionFactory->create();
-        $collection->setVisibility($this->_catalogProductVisibility->getVisibleInCatalogIds());
-        $collection = $this->_addProductAttributesAndPrices(
-            $collection
-        )->addStoreFilter()
-            ->addAttributeToSort('entity_id', 'desc');
-        return $collection;
-    }
     public function getMedia($img = null)
     {
-        $urlMedia = $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+        $urlMedia = $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
         if ($img) return $urlMedia . "magepow/sizechart/" . $img;
         return $urlMedia;
     }

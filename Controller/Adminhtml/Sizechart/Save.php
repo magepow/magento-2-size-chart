@@ -39,7 +39,8 @@ class Save extends \Magento\Backend\App\Action
             if (isset($data['category'])) {
                 $data['category'] = implode(',', $data['category']);
             }
-            $data['conditions_serialized'] = $this->serialize($data);
+
+            $data['conditions_serialized'] = $this->serialize(['parameters' => $data['parameters']]);
 
             if (isset($data['stores'])) $data['stores'] = implode(',', $data['stores']);
             $model->setData($data)->setStoreViewId($storeViewId);;
