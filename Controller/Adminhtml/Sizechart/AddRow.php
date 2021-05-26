@@ -27,7 +27,6 @@ class AddRow extends \Magento\Backend\App\Action
         $rowId = (int) $this->getRequest()->getParam('id');
         $storeViewId = $this->getRequest()->getParam('stores');
         $rowData = $this->sizechartFactory->create();
-
         if ($rowId) {
             // $rowData->setStoreViewId($storeViewId)->load($rowId);
             $rowData = $rowData->setStoreViewId($storeViewId)->load($rowId);
@@ -45,6 +44,7 @@ class AddRow extends \Magento\Backend\App\Action
                     unset($tmp['entity_id']);
                     $rowData->addData($tmp);
                 }
+                $rowData->setData('sizechart_id', $rowData->getEntityId()); // fix conflict entity_id in product condition
             }
         }
 
@@ -52,6 +52,7 @@ class AddRow extends \Magento\Backend\App\Action
         $resultPage = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
         $title = $rowId ? __('Edit Size chart') . $rowTitle : __('Add Size chart');
         $resultPage->getConfig()->getTitle()->prepend($title);
+
         return $resultPage;
     }
 }

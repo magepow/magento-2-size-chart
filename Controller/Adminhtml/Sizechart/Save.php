@@ -27,7 +27,8 @@ class Save extends \Magento\Backend\App\Action
         $data = $this->getRequest()->getPostValue();
 
         if ($data) {
-            $id = $this->getRequest()->getParam('entity_id');
+            $id = $this->getRequest()->getParam('sizechart_id');
+            if($id) $data['entity_id'] = $id; // fix conflict entity_id in product condition
             $model = $this->_sizechartFactory->create();
             $storeViewId = $this->getRequest()->getParam('stores');
             $model->load($id);

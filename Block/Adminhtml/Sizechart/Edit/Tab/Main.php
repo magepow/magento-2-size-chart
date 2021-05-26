@@ -44,7 +44,8 @@ class Main extends Generic implements TabInterface
                 'base_fieldset',
                 ['legend' => __('Edit Size Chart Rule'), 'class' => 'fieldset-wide']
             );
-            $fieldset->addField('entity_id', 'hidden', ['name' => 'entity_id']);
+            // $fieldset->addField('entity_id', 'hidden', ['name' => 'entity_id']); // not use will conflict entity_id ofcondition product
+            $fieldset->addField('sizechart_id', 'hidden', ['name' => 'sizechart_id']);
         } else {
             $fieldset = $form->addFieldset(
                 'base_fieldset',
