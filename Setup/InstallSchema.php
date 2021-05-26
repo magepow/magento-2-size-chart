@@ -75,7 +75,7 @@ class InstallSchema implements InstallSchemaInterface
                 'Size Chart Information'
             )->addColumn('conditions_serialized', Table::TYPE_TEXT, '2M', [], 
             'Conditions Serialized')
-            ->addColumn('sort_order', Table::TYPE_INTEGER, null, [ 'nullable' => false,], 
+            ->addColumn('sort_order', Table::TYPE_INTEGER, null, [ 'nullable' => false, 'default' => '0'], 
             'Sort Order')
             ->addColumn(
                 'updated_at',

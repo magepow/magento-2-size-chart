@@ -1,5 +1,7 @@
-require(["jquery", "Magento_Ui/js/modal/modal"],function($, modal) {
-
+require(["jquery", "Magento_Ui/js/modal/modal"], 
+    function($, modal) {
+        'use strict';
+        var sizechart =  $('.sizechart-popup');
         var options = {
             type: 'popup', // popup or slide
             responsive: true, // true = on smaller screens the modal slides in from the right
@@ -12,10 +14,8 @@ require(["jquery", "Magento_Ui/js/modal/modal"],function($, modal) {
                 }
             }]
         };
-
-        var popup = modal(options, $('.sizechart-popup'));
+        var popup = modal(options, sizechart);
         $(".sizechart-display").click(function() {
-            'use strict';
-            $('.sizechart-popup').modal('openModal');
+            sizechart.modal('openModal');
         });
-    });
+});

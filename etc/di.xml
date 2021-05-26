@@ -4,7 +4,7 @@
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
-            <item name="magepow_sizechart_sizechart_listing_data_source" xsi:type="string">Magepow\Sizechart\Model\ResourceModel\Sizechart\Grid\Collection</item>
+                <item name="magepow_sizechart_sizechart_listing_data_source" xsi:type="string">Magepow\Sizechart\Model\ResourceModel\Sizechart\Grid\Collection</item>
             </argument>
         </arguments>
     </type>
@@ -12,7 +12,7 @@
     <virtualType name="Magepow\Sizechart\Model\ResourceModel\Sizechart\Grid\Collection" 
         type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
-        <argument name="mainTable" xsi:type="string">sizechart_management</argument>
+            <argument name="mainTable" xsi:type="string">sizechart_management</argument>
             <argument name="resourceModel" xsi:type="string">Magepow\Sizechart\Model\ResourceModel\Sizechart</argument>
         </arguments>
     </virtualType>

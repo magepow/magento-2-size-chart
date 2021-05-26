@@ -1,10 +1,15 @@
 var config = {
+	map: {
+        '*': {
+            sizechart: 'Magepow_Sizechart/js/popup'
+        }
+    },
     paths: {            
-         'sizechart': "Magepow_Sizechart/js/popup"
-      },   
+        'magepow/sizechart': "Magepow_Sizechart/js/popup"
+    },   
     shim: {
-    'sizechart': {
-        deps: ['jquery']
-    }
-  }
+	    'magepow/sizechart': {
+	        deps: ['jquery']
+	    }
+  	}
 }

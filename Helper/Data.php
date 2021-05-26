@@ -17,9 +17,8 @@ class Data extends AbstractHelper
     {
 
         parent::__construct($context);
-         // $this->configModule = $this->getConfig(strtolower($this->_getModuleName()));
-         $this->configModule = $this->getConfig(strtolower($this->_getModuleName()));
-          $this->_moduleManager = $moduleManager;
+        $this->configModule = $this->getConfig(strtolower($this->_getModuleName()));
+        $this->_moduleManager = $moduleManager;
     }
     public function getConfig($cfg='')
     {
@@ -48,6 +47,6 @@ class Data extends AbstractHelper
 
     public function isModuleEnabled($moduleName)
     {
-      return $this->_moduleManager->isEnabled($moduleName);
+        return $this->_moduleManager->isEnabled($moduleName);
     }
 }

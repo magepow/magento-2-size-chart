@@ -1,25 +1,13 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-	<!-- <update handle="sizechart_index_index"/> -->
-	 <!-- <referenceContainer name="product.info.main">
-            <block class="Magepow\SizeChart\Block\SizeChart" 
-              template="Magepow_SizeChart::sizechart.phtml" name="sizechart" cacheable="false"
-              />          
-        </referenceContainer> -->
-        <referenceContainer name="product.info.main">
- 
-     <block class="Magepow\Sizechart\Block\Product\Sizechart" name="sizechart" 
-     	after="product.info.addtocart"
-template="Magepow_Sizechart::sizechart.phtml">
-  	 
-     </block>
+  <referenceContainer name="product.info.main">
+    <block class="Magepow\Sizechart\Block\Product\Sizechart" ifconfig="magepow_sizechart/general/enabled" name="sizechart" after="product.info.addtocart" template="sizechart.phtml" />
  </referenceContainer>
   <referenceBlock name="product.info.details">
-           <block class="Magepow\Sizechart\Block\Product\Sizechart" name="custom.tab" template="Magepow_Sizechart::customtab.phtml" group="detailed_info">
-               <arguments>
-                   <argument translate="true" name="title" xsi:type="string" >Custom Tab</argument>
-               </arguments>
-               
-           </block>
-       </referenceBlock>
+    <block class="Magepow\Sizechart\Block\Product\Sizechart" ifconfig="magepow_sizechart/general/enabled" name="custom.tab" template="customtab.phtml" group="detailed_info">
+      <arguments>
+        <argument translate="true" name="title" xsi:type="string" >Custom Tab</argument>
+      </arguments>
+    </block>
+   </referenceBlock>
 </page>

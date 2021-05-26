@@ -8,7 +8,7 @@
             <class>separator-top</class>
             <label>Size Chart</label>
             <tab>magepow</tab>
-            <resource>Magepow_Sizechart::sizechart_config</resource>
+            <resource>Magepow_Sizechart::config</resource>
             <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
                 <label><![CDATA[General]]></label>
                 <field id="enabled" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="1" canRestore="1">
@@ -17,19 +17,18 @@
                 </field>
                 <field id="display_text" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="1" canRestore="1">
                     <label>Display Text Link</label>
-                    
                     <comment>This text will display the link for showing popup sizechart</comment>
-                      <depends>
+                    <depends>
                         <field id="enabled">1</field>
                     </depends>
                 </field>
-                   <field id="image_icon" translate="label" type="image" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                <field id="image_icon" translate="label" type="image" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
                     <label>Image Icon</label>
-        <comment>This section will display the icon for showing popup sizechart</comment>
-        <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
-        <upload_dir config="system/filesystem/media" scope_info="1">magepow/sizechart</upload_dir>
+                    <comment>This section will display the icon for showing popup sizechart</comment>
+                    <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                    <upload_dir config="system/filesystem/media" scope_info="1">magepow/sizechart</upload_dir>
                     <base_url type="media" scope_info="1">magepow/sizechart</base_url>
-                     <depends>
+                    <depends>
                         <field id="enabled">1</field>
                     </depends>
                 </field>

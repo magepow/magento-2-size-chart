@@ -1,6 +1,7 @@
 <?php
+
 namespace Magepow\Sizechart\Block\Product;
- 
+
 class Sizechart extends \Magento\Catalog\Block\Product\AbstractProduct
 {
 
@@ -32,7 +33,7 @@ class Sizechart extends \Magento\Catalog\Block\Product\AbstractProduct
      */
     protected $_stockConfig;
 
-     /**
+    /**
      * @var \Magento\CatalogInventory\Helper\Stock
      */
     protected $_stockFilter;
@@ -70,7 +71,7 @@ class Sizechart extends \Magento\Catalog\Block\Product\AbstractProduct
     protected $_abstractProduct;
     protected $json;
     protected $_filter;
-   
+
     /**
      * @param Context $context
      * @param \Magento\Framework\ObjectManagerInterface $objectManager
@@ -83,7 +84,7 @@ class Sizechart extends \Magento\Catalog\Block\Product\AbstractProduct
         \Magento\Catalog\Block\Product\Context $context,
         \Magento\Framework\Url\Helper\Data $urlHelper,
         \Magento\Framework\ObjectManagerInterface $objectManager,
-         \Magento\Store\Model\StoreManagerInterface $storeManager,
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Catalog\Api\CategoryRepositoryInterface $categoryRepository,
         \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
         \Magento\Catalog\Model\Product\Visibility $catalogProductVisibility,
@@ -91,12 +92,12 @@ class Sizechart extends \Magento\Catalog\Block\Product\AbstractProduct
         \Magento\CatalogInventory\Model\Configuration $stockConfig,
         \Magento\CatalogWidget\Model\RuleFactory $ruleFactory,
         \Magento\Rule\Model\Condition\Sql\Builder $sqlBuilder,
-          \Magepow\Sizechart\Model\SizechartFactory $sizechartFactory,
-          \Magepow\Sizechart\Serialize\Serializer\Json $json,
-          \Magento\Cms\Model\Template\FilterProvider $filter,
+        \Magepow\Sizechart\Model\SizechartFactory $sizechartFactory,
+        \Magepow\Sizechart\Serialize\Serializer\Json $json,
+        \Magento\Cms\Model\Template\FilterProvider $filter,
         array $data = []
     ) {
-         $this->storeManager = $storeManager;
+        $this->storeManager = $storeManager;
         $this->_abstractProduct = $abstractProduct;
         $this->urlHelper = $urlHelper;
         $this->_objectManager = $objectManager;
@@ -110,71 +111,73 @@ class Sizechart extends \Magento\Catalog\Block\Product\AbstractProduct
         $this->_filter = $filter;
         $this->json = $json;
         $this->_sizechartFactory = $sizechartFactory;
-        parent::__construct( $context, $data );
-        
+        parent::__construct($context, $data);
     }
     protected function _construct()
     {
         parent::_construct();
         $this->addData([
             'cache_lifetime' => false,
-            'cache_tags' => [\Magento\Catalog\Model\Product::CACHE_TAG,
-            ], ]);
+            'cache_tags' => [
+                \Magento\Catalog\Model\Product::CACHE_TAG,
+            ],
+        ]);
     }
-//>addFieldToFilter('stores',array( array('finset' => 0), array('finset' => $store_id)))->
-    //->setOrder('sort_order','DESC')
-   public function getConfig(){
-                
-                $store_id = $this->getCurrentProduct()->getStoreId();
 
-             	$item = $this->_sizechartFactory->create();
-                $collection = $item->getCollection()->addFieldToSelect('conditions_serialized')->addFieldToFilter('is_active', 1)->addFieldToFilter('stores',array( array('finset' => 0), array('finset' => $store_id)))->setOrder('sort_order','DESC');
-                                foreach ($collection as $value) {
-                                  $config = $value ->getConditionsSerialized();
-                                   $data = $this->json->unserialize($config);
-                                   $this->_parameters =  $data['parameters'];
-                                   return $data; 
-                                }
-                                 }
-                // return $data; 
-              
+    public function getConfig()
+    {
+
+        $store_id = $this->getCurrentProduct()->getStoreId();
+
+        $item = $this->_sizechartFactory->create();
+        $collection = $item->getCollection()->addFieldToSelect('conditions_serialized')->addFieldToFilter('is_active', 1)->addFieldToFilter('stores', array(array('finset' => 0), array('finset' => $store_id)))->setOrder('sort_order', 'DESC');
+        foreach ($collection as $value) {
+            $config = $value->getConditionsSerialized();
+            $data = $this->json->unserialize($config);
+            $this->_parameters =  $data['parameters'];
+            return $data;
+        }
+    }
+    // return $data; 
+
     public function getContentFromStaticBlock($content)
-{
-    return $this->_filter->getBlockFilter()->filter($content);
-}
- 
- public function getClass($typeDisplay){
-  if($typeDisplay == 1){
-  return 'sizechart-inline';
-  }elseif($typeDisplay == 2){
- return 'sizechart-popup';
-  }else{
-    return 'sizechart-customtab';
-  }
-  
-}
+    {
+        return $this->_filter->getBlockFilter()->filter($content);
+    }
 
-  public function array_replace_key($search, $replace, array $subject) {
-    $updatedArray = [];
+    public function getClass($typeDisplay)
+    {
+        if ($typeDisplay == 1) {
+            return 'sizechart-inline';
+        } elseif ($typeDisplay == 2) {
+            return 'sizechart-popup';
+        } else {
+            return 'sizechart-customtab';
+        }
+    }
 
-    foreach ($subject as $key => $value) {
-        if (!is_array($value) && $key == $search) {
-            $updatedArray = array_merge($updatedArray, [$replace => $value]);
-            
-            continue;
+    public function array_replace_key($search, $replace, array $subject)
+    {
+        $updatedArray = [];
+
+        foreach ($subject as $key => $value) {
+            if (!is_array($value) && $key == $search) {
+                $updatedArray = array_merge($updatedArray, [$replace => $value]);
+
+                continue;
+            }
+
+            $updatedArray = array_merge($updatedArray, [$key => $value]);
         }
 
-        $updatedArray = array_merge($updatedArray, [$key => $value]);
+        return $updatedArray;
     }
-
-    return $updatedArray;
-}
     public function getLoadedProductCollection()
     {
         $this->_limit = (int) $this->getConfig();
         $collection = $this->getProducts();
         $parameters = $this->_parameters;
-        if($parameters){
+        if ($parameters) {
             $rule = $this->getRule($parameters);
             $conditions = $rule->getConditions();
             $conditions->collectValidatedAttributes($collection);
@@ -189,37 +192,36 @@ class Sizechart extends \Magento\Catalog\Block\Product\AbstractProduct
         );
         $page = $this->getRequest()->getPost('p', 1);
         return $collection->setCurPage($page);
-     
     }
 
 
     protected function getRule($conditions)
     {
         $rule = $this->_ruleFactory->create();
-        if(is_array($conditions)) $rule->loadPost($conditions);
-        return $rule; 
+        if (is_array($conditions)) $rule->loadPost($conditions);
+        return $rule;
     }
-    public function getCurrentProduct(){
+    public function getCurrentProduct()
+    {
         $product = $this->_abstractProduct->getProduct();
         return $product;
     }
 
-    public function getProducts(){
-     
+    public function getProducts()
+    {
+
         $collection = $this->_productCollectionFactory->create();
         $collection->setVisibility($this->_catalogProductVisibility->getVisibleInCatalogIds());
         $collection = $this->_addProductAttributesAndPrices(
             $collection
         )->addStoreFilter()
-        ->addAttributeToSort('entity_id', 'desc');
+            ->addAttributeToSort('entity_id', 'desc');
         return $collection;
-      
     }
-     public function getMedia($img=null)
+    public function getMedia($img = null)
     {
         $urlMedia = $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
-        if($img) return $urlMedia . "magepow/sizechart/" . $img;
+        if ($img) return $urlMedia . "magepow/sizechart/" . $img;
         return $urlMedia;
-    }  
-
+    }
 }

@@ -1,17 +1,18 @@
 <?php
 
-
 namespace Magepow\Sizechart\Controller\Adminhtml\Sizechart;
 
 use Magento\Framework\Controller\ResultFactory;
 
 class AddRow extends \Magento\Backend\App\Action
 {
-       private $coreRegistry;
+    private $coreRegistry;
     private $sizechartFactory;
     protected $json;
 
-    public function __construct(\Magento\Backend\App\Action\Context $context, \Magento\Framework\Registry $coreRegistry,
+    public function __construct(
+        \Magento\Backend\App\Action\Context $context,
+        \Magento\Framework\Registry $coreRegistry,
         \Magepow\Sizechart\Model\SizechartFactory $sizechartFactory,
         \Magepow\Sizechart\Serialize\Serializer\Json $json
     ) {
@@ -36,11 +37,10 @@ class AddRow extends \Magento\Backend\App\Action
                 $this->messageManager->addError(__('row data no longer exist.'));
                 $this->_redirect('magepow_sizechart/sizechart/rowdata');
 
-                return ;
-             }
-             else{
+                return;
+            } else {
                 $tmp = $this->json->unserialize($rowData->getConditionsSerialized());
-                if(is_array($tmp)){
+                if (is_array($tmp)) {
                     unset($tmp['form_key']);
                     unset($tmp['entity_id']);
                     $rowData->addData($tmp);
@@ -50,10 +50,8 @@ class AddRow extends \Magento\Backend\App\Action
 
         $this->coreRegistry->register('row_data', $rowData);
         $resultPage = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
-        $title = $rowId ? __('Edit sizechart ').$rowTitle : __('Add sizechart');
+        $title = $rowId ? __('Edit Size chart ') . $rowTitle : __('Add Size chart');
         $resultPage->getConfig()->getTitle()->prepend($title);
         return $resultPage;
     }
-
-
 }

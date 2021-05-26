@@ -37,17 +37,14 @@ class Tabs extends WidgetTabs
         $this->addTab(
             'category',
             [
-                'label' => __('Category Information'),
-                'title' => __('Category Information'),
+                'label' => __('Condition apply for products'),
+                'title' => __('Condition apply for products'),
                 'content' => $this->getLayout()->createBlock(
-                    'Magepow\Sizechart\Block\Adminhtml\Sizechart\Edit\Tab\Category'
+                    'Magepow\Sizechart\Block\Adminhtml\Sizechart\Edit\Tab\Condition'
                 )->toHtml(),
             ]
         );
         
-
         return parent::_beforeToHtml();
     }
 }
-
-

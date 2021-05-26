@@ -5,39 +5,31 @@ namespace Magepow\Sizechart\Block\Adminhtml\Sizechart\Edit\Tab;
 use Magento\Backend\Block\Widget\Form\Generic;
 use Magento\Backend\Block\Widget\Tab\TabInterface;
 
-
-class Category extends Generic implements TabInterface
+class Condition extends Generic implements TabInterface
 {
-
-
-    protected $_objectManager;
-    protected $_systemStore;
-    protected $_category;
     protected $_renderFieldSet;
     protected $_conditions;
+    protected $_ruleFactory;
+
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
         \Magento\Framework\Registry $registry,
         \Magento\Framework\Data\FormFactory $formFactory,
         \Magento\Store\Model\System\Store $systemStore,
         \Magento\Framework\ObjectManagerInterface $objectManager,
-         // \Magepow\SizeChart\Model\SizeChart $sizechart,
-         \Magepow\Sizechart\Model\System\Config\Category $category,
-          \Magento\Rule\Block\Conditions $conditions,
+        \Magento\Rule\Block\Conditions $conditions,
+        \Magento\CatalogWidget\Model\RuleFactory $ruleFactory,
         \Magento\Backend\Block\Widget\Form\Renderer\Fieldset $rendererFieldset,
         array $data = []
     ) {
       
-        // $this->_sizechart = $sizechart;
-        $this->_category = $category;
         $this->_conditions = $conditions;
+        $this->_ruleFactory = $ruleFactory;
         $this->_renderFieldSet = $rendererFieldset;
-        $this->_systemStore = $systemStore;
-        $this->_objectManager = $objectManager;
+
         parent::__construct($context, $registry, $formFactory, $data);
     }
     protected function _prepareForm()
-
     {
         $model = $this->_coreRegistry->registry('row_data');
         $form = $this->_formFactory->create();
@@ -47,16 +39,12 @@ class Category extends Generic implements TabInterface
         $formName = 'catalog_rule_form';
 
         $widgetParameters = $model->getParameters();
-        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        $modelRule = $objectManager->get('Magento\CatalogWidget\Model\RuleFactory');
-        $modelConditions = $modelRule->create();
-        if (is_array($widgetParameters))
-        {
+        $modelConditions = $this->_ruleFactory->create();
+
+        if (is_array($widgetParameters)){
             $modelConditions->loadPost($widgetParameters);
             $modelConditions->getConditions()->setJsFormObject($fieldsetId);
-
         }
-
 
         $newChildUrl = $this->getUrl(
             'catalog_rule/promo_catalog/newConditionHtml/form/' . $fieldsetId,
@@ -67,7 +55,6 @@ class Category extends Generic implements TabInterface
             ->setNewChildUrl($newChildUrl)
             ->setFieldSetId($fieldsetId);
 
-  
         $fieldset = $form->addFieldset(
             $fieldsetId,
             ['legend' => __('Conditions (don\'t add conditions if rule is applied to all products)')]
@@ -83,10 +70,7 @@ class Category extends Generic implements TabInterface
                 'required' => false,
                 'data-form-parts' => $formName
             ]
-        )
-            ->setRule($modelConditions)
-            ->setRenderer($this->_conditions);
-       
+        )->setRule($modelConditions)->setRenderer($this->_conditions);
 
         $form->setValues($model->getData());
         $this->setForm($form);
@@ -97,14 +81,13 @@ class Category extends Generic implements TabInterface
 
     public function getTabLabel()
     {
-        return __('Category Information');
+        return __('Condition apply for products');
     }
 
  
     public function getTabTitle()
     {
-        // TODO: Implement getTabTitle() method.
-        return __('Category Information');
+        return __('Condition apply for products');
     }
 
     /**
@@ -115,7 +98,6 @@ class Category extends Generic implements TabInterface
      */
     public function canShowTab()
     {
-        // TODO: Implement canShowTab() method.
         return true;
     }
 
@@ -127,7 +109,6 @@ class Category extends Generic implements TabInterface
      */
     public function isHidden()
     {
-        // TODO: Implement isHidden() method.
         return false;
     }
 }

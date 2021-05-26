@@ -1,8 +1,6 @@
 <?php
 
 namespace Magepow\Sizechart\Controller\Adminhtml\Sizechart;
-//Magento\Backend\App\Action
-
 class Save extends \Magento\Backend\App\Action
 {
     protected $_sizechartFactory;
@@ -10,76 +8,53 @@ class Save extends \Magento\Backend\App\Action
         \Magento\Backend\App\Action\Context $context,
         \Magepow\Sizechart\Model\SizechartFactory $sizechartFactory
 
-    )
-    {
+    ) {
         parent::__construct($context);
         $this->_sizechartFactory = $sizechartFactory;
-
     }
- public function serialize($data)
- {
-    
+    public function serialize($data)
+    {
+
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $serializer = $objectManager->create(\Magento\Framework\Serialize\SerializerInterface::class);
         return $serializer->serialize($data);
-    
-     
-}
-    
+    }
+
     public function execute()
     {
         $resultRedirect = $this->resultRedirectFactory->create();
         // check if data sent
         $data = $this->getRequest()->getPostValue();
-      //  print_r (serialize($data));
-        // exit();
-     
+
         if ($data) {
-    $id = $this->getRequest()->getParam('entity_id');
-    $model = $this->_sizechartFactory->create();
-    $storeViewId = $this->getRequest()->getParam('stores');
-    $model->load($id);
-    if (!$model->getId() && $id) {
-     $this->messageManager->addError(__('This item no longer exists.'));
-        return $resultRedirect->setPath('*/*/');
+            $id = $this->getRequest()->getParam('entity_id');
+            $model = $this->_sizechartFactory->create();
+            $storeViewId = $this->getRequest()->getParam('stores');
+            $model->load($id);
+            if (!$model->getId() && $id) {
+                $this->messageManager->addError(__('This item no longer exists.'));
+                return $resultRedirect->setPath('*/*/');
             }
-            
-            if (isset($data['category'])){
 
+            if (isset($data['category'])) {
                 $data['category'] = implode(',', $data['category']);
-                // $data['category'] = $data['category_id']; 
-
-                     
             }
-               $data['conditions_serialized'] = $this->serialize($data);
-              
-              
-              
-             if(isset($data['stores'])) $data['stores'] = implode(',', $data['stores']);
-             $model->setData($data)->setStoreViewId($storeViewId);;
+            $data['conditions_serialized'] = $this->serialize($data);
 
-      
-
-            // init model and set data
-
-            
-
+            if (isset($data['stores'])) $data['stores'] = implode(',', $data['stores']);
+            $model->setData($data)->setStoreViewId($storeViewId);;
 
             // try to save it
             try {
-                // $model->loadPost($model->getData());
-                // save the data
+
                 $model->save();
                 // display success message
                 $this->messageManager->addSuccess(__('You saved the item.'));
-                // $this->_getSession()->setFormData(false);
-
 
                 if ($this->getRequest()->getParam('back')) {
                     $this->_redirect('*/*/addrow', ['id' => $model->getId(), '_current' => true]);
                     return;
                 }
-
 
                 // go to grid
                 return $resultRedirect->setPath('*/*/index');
@@ -92,7 +67,7 @@ class Save extends \Magento\Backend\App\Action
                 return $resultRedirect->setPath('*/*/addrow', ['id' => $this->getRequest()->getParam('id')]);
             }
         }
+
         return $resultRedirect->setPath('*/*/index');
     }
-    
 }

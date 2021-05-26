@@ -90,7 +90,7 @@ class Main extends Generic implements TabInterface
             $model->setStoreId($this->_storeManager->getStore(true)->getId());
         }
        
-         $fieldset->addField(
+        $fieldset->addField(
             'description',
             'textarea',
             [
@@ -98,13 +98,11 @@ class Main extends Generic implements TabInterface
                 'label' => __('Description'),
                 'id' => 'description',
                 'title' => __('Description'),
-                // 'class' => 'required_entry',
                 'style'=>'height:10em',
                 'required' => false,
             ]
         );
          
-         //['tab_id' => $this->getTabId()]
         $wysiwygConfig = $this->_wysiwygConfig->getConfig(['tab_id' => $this->getTabId()]);
             $fieldset->addField(
             'sizechart_info',
@@ -116,7 +114,8 @@ class Main extends Generic implements TabInterface
                 'config' => $wysiwygConfig
             ]
         );
-            $fieldset->addField(
+
+        $fieldset->addField(
             'sort_order',
             'text',
             [
@@ -124,10 +123,11 @@ class Main extends Generic implements TabInterface
                 'label' => __('Sort Order'),
                 'id' => 'sort_order',
                 'title' => __('Sort Order'),
-                'required' => true,
+                'required' => false,
             ]
         );
-             $fieldset->addField(
+
+        $fieldset->addField(
             'type_display',
             'select',
             [
@@ -136,7 +136,6 @@ class Main extends Generic implements TabInterface
                 'id' => 'type_display',
                 'title' => __('Type Display'),
                 'values' => $this->_typeDisplay->getOptionArray(),
-                'class' => 'status',
                 'required' => true,
             ]
         );
@@ -150,14 +149,12 @@ class Main extends Generic implements TabInterface
                 'id' => 'is_active',
                 'title' => __('Status'),
                 'values' => $this->_options->getOptionArray(),
-                'class' => 'status',
+                'value' => 1,
                 'required' => true,
             ]
         );
 
-
-
-        $form->setValues($model->getData());
+        $form->addValues($model->getData());
         $this->setForm($form);
 
         return parent::_prepareForm();
@@ -172,7 +169,6 @@ class Main extends Generic implements TabInterface
  
     public function getTabTitle()
     {
-        // TODO: Implement getTabTitle() method.
         return __('General Information');
     }
 
@@ -184,7 +180,6 @@ class Main extends Generic implements TabInterface
      */
     public function canShowTab()
     {
-        // TODO: Implement canShowTab() method.
         return true;
     }
 
@@ -196,7 +191,6 @@ class Main extends Generic implements TabInterface
      */
     public function isHidden()
     {
-        // TODO: Implement isHidden() method.
         return false;
     }
 }

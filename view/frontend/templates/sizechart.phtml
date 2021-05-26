@@ -2,72 +2,49 @@
 <?php
 
 $helper = $this->helper('Magepow\Sizechart\Helper\Data');
-$isEnabled =  $helper->getConfigModule('general/enabled'); 
-if($isEnabled){
+
 $isTextLinkDisplayed = $helper->getConfigModule('general/display_text');
 $iconImage   = $helper->getConfigModule('general/image_icon');
 $iconImageShow = $block->getMedia($iconImage);
- $productCollection = $block->getConfig(); 
- $typeDisplay = $productCollection['type_display'];
- $name = $productCollection['name'];
- $description = $productCollection['description'];
- $sizechartInfo = $productCollection['sizechart_info'];
-  $currentProductId = $block->getCurrentProduct()->getId();
-  
-
-//   foreach ($currentProductId as $attribute) {
-//      print_r($attribute->getFrontendLabel()->getValue());
-// }
-// //print_r($currentProductId);
+$productCollection = $block->getConfig(); 
+$typeDisplay = $productCollection['type_display'];
+$name = $productCollection['name'];
+$description = $productCollection['description'];
+$sizechartInfo = $productCollection['sizechart_info'];
+$currentProductId = $block->getCurrentProduct()->getId();
         
-  $productArrayId = array($currentProductId);
- $_productCollection = $block->getLoadedProductCollection();
+$productArrayId = array($currentProductId);
+$_productCollection = $block->getLoadedProductCollection();
 
-	foreach ($_productCollection as $value) {
-	$arrayProduct = $value->getData();
-
-	if(array_intersect($productArrayId, $arrayProduct)){
-	//print_r(array_intersect($productArrayId, $arrayProduct));
-    
-
-  ?>
+foreach ($_productCollection as $value) {
+  $arrayProduct = $value->getData();
+	if(array_intersect($productArrayId, $arrayProduct)){    
+?>
   
-  <div class="sizechart">
- 	<?php 
-  
-  if($typeDisplay == 2) { ?>
- 		<div data-mage-init='{"sizechart": {}}'>
-     		 <div class="sizechart-display">
-            <img src="<?php echo $iconImageShow; ?>" alt="this is image icon"> 
-           <a href = "#" class="textlink"><?php echo $isTextLinkDisplayed; ?></a>
-        </div>
-       </div>
-        <?php 
-    }
-     
-      
-        ?>
-      
-     <div class="<?php echo $block->getClass($typeDisplay);?>"> 
-     	
-         <h2 class="sizechart-name"><?php echo $name;?></h2>
-        <div class="info">
-            <p class="des"><?php echo $description; ?></p>
-
-        </div>
-        <div class="sizechart-digram">
+    <div class="sizechart">
+     	<?php if($typeDisplay == 2) : ?>
+    		<div data-mage-init='{"sizechart": {}}'>
+       		 <div class="sizechart-display">
+              <img src="<?php echo $iconImageShow; ?>" alt="this is image icon"> 
+             <a href = "#" class="textlink"><?php echo $isTextLinkDisplayed; ?></a>
+          </div>
+         </div>
+      <?php endif; ?>
+        
+      <div class="<?php echo $block->getClass($typeDisplay);?>"> 
+        <h2 class="sizechart-name"><?php echo $name;?></h2>
+          <div class="info">
+              <div class="des"><?php echo $description; ?></div>
+          </div>
+          <div class="sizechart-digram">
             <?php echo $block->getContentFromStaticBlock($sizechartInfo);?>
-        </div> 
-
-     </div> 
-    
-  </div> 
+          </div> 
+      </div> 
+    </div> 
   <?php 
- 
-}
- 
-}
-}
-     
 
-  ?>
+  }
+ 
+}
+
+?>

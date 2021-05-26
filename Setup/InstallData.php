@@ -33,16 +33,7 @@ class InstallData implements InstallDataInterface {
      * {@inheritdoc}
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context) {
-        //  $data = [
-        //     [
-                
-        //     ],
-        // ];
-        // $columns = [];
-
-        // $setup->getConnection()->insertArray($setup->getTable('sizechart_management'), $columns, $data);
-    
+    public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context) {    
 
         /** @var EavSetup $eavSetup */
         $eavSetup = $this->eavSetupFactory->create(['setup' => $setup]);

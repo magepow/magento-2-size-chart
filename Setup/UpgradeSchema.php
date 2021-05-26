@@ -7,51 +7,37 @@ use Magento\Framework\DB\Ddl\Table;
 
 class UpgradeSchema implements UpgradeSchemaInterface
 {
-	  public function upgrade(SchemaSetupInterface $setup, ModuleContextInterface $context)
+	public function upgrade(SchemaSetupInterface $setup, ModuleContextInterface $context)
     {
     	$setup->startSetup();
         $tableName = $setup->getTable('sizechart_management');
-            if (version_compare($context->getVersion(), '2.0.0', '<')) {
-            	if ($setup->getConnection()->isTableExists($tableName) == true){
+        if (version_compare($context->getVersion(), '2.0.0', '<')) {
+        	if ($setup->getConnection()->isTableExists($tableName) == true){
                 $connection = $setup->getConnection();
-                // $connection->addColumn(
-                //     $setup->getTable($tableName),'name',['type' => Table::TYPE_TEXT,
-                //         'length' => '2M',
-                //         'nullable' => false,
-                //          'comment'=>'name']
-                // );
                 $connection->addColumn(
-                	$setup->getTable($tableName),'template_css',['type' => Table::TYPE_TEXT,
+                	$setup->getTable($tableName),'template_css',[
+                        'type' => Table::TYPE_TEXT,
                         'length' => '2M',
                         'nullable' => true,
-                         'comment'=>'template css']
+                        'comment'=>'template css']
                 );
 
             }
-            }
-    //         if (version_compare($context->getVersion(), '2.2.0', '<')) {
-    //             if ($setup->getConnection()->isTableExists($tableName) == true){
-    //             $connection = $setup->getConnection();
-    //             $connection->addColumn(
-    //                 $setup->getTable($tableName),'conditions_serialized',['type' => Table::TYPE_TEXT,
-    //                     'length' => '2M',
-    //                     'nullable' => false,
-    //                      'comment'=>'Conditions Serialized']
-    //             );
-    //         }
-    // }
-    if (version_compare($context->getVersion(), '2.3.0', '<')) {
-                if ($setup->getConnection()->isTableExists($tableName) == true){
+        }
+
+        if (version_compare($context->getVersion(), '2.3.0', '<')) {
+            if ($setup->getConnection()->isTableExists($tableName) == true){
                 $connection = $setup->getConnection();
                 $connection->addColumn(
-                    $setup->getTable($tableName),'stores',['type' => Table::TYPE_TEXT,
-                        'length' => '2M',
-                        'nullable' => false,
-                         'comment'=>'Store Views']
+                    $setup->getTable($tableName),'stores',[
+                            'type' => Table::TYPE_TEXT,
+                            'length' => '2M',
+                            'nullable' => false,
+                             'comment'=>'Store Views'
+                        ]
                 );
             }
-    }
-    
+        }
 
-}
+    }
 }

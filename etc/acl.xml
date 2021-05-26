@@ -5,7 +5,7 @@
                 <resource id="Magento_Backend::stores">
                     <resource id="Magento_Backend::stores_settings">
                         <resource id="Magento_Config::config">
-                            <resource id="Magepow_Sizechart::sizechart_config" title="Size Chart"/>
+                            <resource id="Magepow_Sizechart::config" title="Size Chart"/>
                         </resource>
                     </resource>
                 </resource>

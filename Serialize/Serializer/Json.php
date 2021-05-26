@@ -1,23 +1,17 @@
 <?php
 namespace Magepow\Sizechart\Serialize\Serializer;
 
-
-
 class Json extends \Magento\Framework\Serialize\Serializer\Json
 {
-
-
     
     public function unserialize($string)
     {
-      if($this->is_serialized($string))
-        {
+        if($this->is_serialized($string)){
             $string = $this->serialize($string);
         }
         $result = json_decode($string, true);
         if (json_last_error() !== JSON_ERROR_NONE) {
-             throw new \InvalidArgumentException('Unable to unserialize value.');
-
+            throw new \InvalidArgumentException('Unable to unserialize value.');
         }
         return $result;
     }
@@ -25,7 +19,7 @@ class Json extends \Magento\Framework\Serialize\Serializer\Json
 
     function is_serialized($value, &$result = null)
     {
-    // Bit of a give away this one
+        // Bit of a give away this one
         if (!is_string($value))
         {
             return false;
