@@ -1,6 +1,9 @@
 {
   "name": "magepow/sizechart",
   "description": "Size chart extension for Magento helps you create size charts for products on your website.",
+  "require": {
+    "magepow/core": "^1.0.0"
+  },
   "type": "magento2-module",
   "license": [
       "OSL-3.0",
