@@ -10,8 +10,7 @@ class AddRow extends \Magento\Backend\Block\Widget\Form\Container
         \Magento\Backend\Block\Widget\Context $context,
         \Magento\Framework\Registry $registry,
         array $data = []
-    )
-    {
+    ) {
         $this->_coreRegistry = $registry;
         parent::__construct($context, $data);
     }
@@ -25,28 +24,26 @@ class AddRow extends \Magento\Backend\Block\Widget\Form\Container
         if ($this->_isAllowedAction('Magepow_Sizechart::add_row')) {
             $this->buttonList->update('save', 'label', __('Save'));
             $this->buttonList->add(
-            'saveandcontinue',
-            [
-                'label' => __('Save and Continue Edit'),
-                'class' => 'save',
-                'data_attribute' => [
-                    'mage-init' => [
-                        'button' => [
-                            'event' => 'saveAndContinueEdit',
-                            'target' => '#edit_form'
+                'saveandcontinue',
+                [
+                    'label' => __('Save and Continue Edit'),
+                    'class' => 'save',
+                    'data_attribute' => [
+                        'mage-init' => [
+                            'button' => [
+                                'event' => 'saveAndContinueEdit',
+                                'target' => '#edit_form'
+                            ]
                         ]
                     ]
                 ]
-            ]
-        );
-            
+            );
         } else {
             $this->buttonList->remove('save');
         }
         // $this->buttonList->remove('reset');
-       
-    }
 
+    }
 
     public function getHeaderText()
     {

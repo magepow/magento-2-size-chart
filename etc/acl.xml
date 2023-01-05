@@ -2,8 +2,8 @@
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
-                <resource id="Magepow_Sizechart::magepow" title="Size Chart" sortOrder="10" >
-                     <resource id="Magepow_Sizechart::sizechart" title="Size Chart Management" sortOrder="50" />
+                <resource id="Magepow_Sizechart::magepow" title="Size Chart" sortOrder="10">
+                    <resource id="Magepow_Sizechart::sizechart" title="Size Chart Management" sortOrder="50" />
                 </resource>
                 <resource id="Magento_Backend::stores">
                     <resource id="Magento_Backend::stores_settings">

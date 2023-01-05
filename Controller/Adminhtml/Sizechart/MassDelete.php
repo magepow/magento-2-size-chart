@@ -31,7 +31,6 @@ class MassDelete extends \Magento\Backend\App\Action
         parent::__construct($context);
     }
 
-  
     public function execute()
     {
         $collection = $this->_filter->getCollection($this->_collectionFactory->create());
@@ -41,8 +40,10 @@ class MassDelete extends \Magento\Backend\App\Action
             $record->delete();
             $recordDeleted++;
         }
-        $this->messageManager->addSuccess(__('A total of %1 record(s) have been deleted.', 
-            $recordDeleted));
+        $this->messageManager->addSuccess(__(
+            'A total of %1 record(s) have been deleted.',
+            $recordDeleted
+        ));
 
         return $this->resultFactory->create(ResultFactory::TYPE_REDIRECT)->setPath('*/*/index');
     }

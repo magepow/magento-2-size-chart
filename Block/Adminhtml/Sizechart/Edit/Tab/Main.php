@@ -7,14 +7,12 @@ use Magento\Backend\Block\Widget\Tab\TabInterface;
 
 class Main extends Generic implements TabInterface
 {
-
-
     protected $_systemStore;
     protected $_objectManager;
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
         \Magento\Framework\Registry $registry,
-         \Magento\Cms\Model\Wysiwyg\Config $wysiwygConfig,
+        \Magento\Cms\Model\Wysiwyg\Config $wysiwygConfig,
         \Magento\Framework\Data\FormFactory $formFactory,
         \Magento\Framework\ObjectManagerInterface $objectManager,
         \Magepow\Sizechart\Model\Status $options,
@@ -52,8 +50,8 @@ class Main extends Generic implements TabInterface
                 ['legend' => __('Add Size Chart Rule'), 'class' => 'fieldset-wide']
             );
         }
- 
-       $fieldset->addField(
+
+        $fieldset->addField(
             'name',
             'text',
             [
@@ -61,7 +59,7 @@ class Main extends Generic implements TabInterface
                 'label' => __('Name'),
                 'id' => 'name',
                 'title' => __('Name'),
-                'class'=>'required_entry',
+                'class' => 'required_entry',
                 'required' => true,
             ]
         );
@@ -90,7 +88,7 @@ class Main extends Generic implements TabInterface
             );
             $model->setStoreId($this->_storeManager->getStore(true)->getId());
         }
-       
+
         $fieldset->addField(
             'description',
             'textarea',
@@ -99,13 +97,13 @@ class Main extends Generic implements TabInterface
                 'label' => __('Description'),
                 'id' => 'description',
                 'title' => __('Description'),
-                'style'=>'height:10em',
+                'style' => 'height:10em',
                 'required' => false,
             ]
         );
-         
+
         $wysiwygConfig = $this->_wysiwygConfig->getConfig(['tab_id' => $this->getTabId()]);
-            $fieldset->addField(
+        $fieldset->addField(
             'sizechart_info',
             'editor',
             [
@@ -140,7 +138,7 @@ class Main extends Generic implements TabInterface
                 'required' => true,
             ]
         );
-      
+
         $fieldset->addField(
             'is_active',
             'select',
@@ -159,7 +157,6 @@ class Main extends Generic implements TabInterface
         $this->setForm($form);
 
         return parent::_prepareForm();
-
     }
 
     public function getTabLabel()
@@ -167,7 +164,6 @@ class Main extends Generic implements TabInterface
         return __('General Information');
     }
 
- 
     public function getTabTitle()
     {
         return __('General Information');

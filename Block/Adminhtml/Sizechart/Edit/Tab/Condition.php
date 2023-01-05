@@ -22,7 +22,7 @@ class Condition extends Generic implements TabInterface
         \Magento\Backend\Block\Widget\Form\Renderer\Fieldset $rendererFieldset,
         array $data = []
     ) {
-      
+
         $this->_conditions = $conditions;
         $this->_ruleFactory = $ruleFactory;
         $this->_renderFieldSet = $rendererFieldset;
@@ -34,14 +34,14 @@ class Condition extends Generic implements TabInterface
         $model = $this->_coreRegistry->registry('row_data');
         $form = $this->_formFactory->create();
         $form->setHtmlIdPrefix('wkgrid_');
-       
+
         $fieldsetId = 'conditions_fieldset';
         $formName = 'catalog_rule_form';
 
         $widgetParameters = $model->getParameters();
         $modelConditions = $this->_ruleFactory->create();
 
-        if (is_array($widgetParameters)){
+        if (is_array($widgetParameters)) {
             $modelConditions->loadPost($widgetParameters);
             $modelConditions->getConditions()->setJsFormObject($fieldsetId);
         }
@@ -76,7 +76,6 @@ class Condition extends Generic implements TabInterface
         $this->setForm($form);
 
         return parent::_prepareForm();
-
     }
 
     public function getTabLabel()
@@ -84,7 +83,6 @@ class Condition extends Generic implements TabInterface
         return __('Condition apply for products');
     }
 
- 
     public function getTabTitle()
     {
         return __('Condition apply for products');

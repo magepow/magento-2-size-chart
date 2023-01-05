@@ -1,12 +1,13 @@
 <?php
+
 namespace Magepow\Sizechart\Serialize\Serializer;
 
 class Json extends \Magento\Framework\Serialize\Serializer\Json
 {
-    
+
     public function unserialize($string)
     {
-        if($this->is_serialized($string)){
+        if ($this->is_serialized($string)) {
             $string = $this->serialize($string);
         }
         $result = json_decode($string, true);
@@ -16,29 +17,24 @@ class Json extends \Magento\Framework\Serialize\Serializer\Json
         return $result;
     }
 
-
     function is_serialized($value, &$result = null)
     {
         // Bit of a give away this one
-        if (!is_string($value))
-        {
+        if (!is_string($value)) {
             return false;
         }
         // Serialized false, return true. unserialize() returns false on an
         // invalid string or it could return false if the string is serialized
         // false, eliminate that possibility.
-        if ($value === 'b:0;')
-        {
+        if ($value === 'b:0;') {
             $result = false;
             return true;
         }
         $length = strlen($value);
         $end    = '';
-        switch ($value[0])
-        {
+        switch ($value[0]) {
             case 's':
-                if ($value[$length - 2] !== '"')
-                {
+                if ($value[$length - 2] !== '"') {
                     return false;
                 }
             case 'b':
@@ -49,12 +45,10 @@ class Json extends \Magento\Framework\Serialize\Serializer\Json
             case 'a':
             case 'O':
                 $end .= '}';
-                if ($value[1] !== ':')
-                {
+                if ($value[1] !== ':') {
                     return false;
                 }
-                switch ($value[2])
-                {
+                switch ($value[2]) {
                     case 0:
                     case 1:
                     case 2:
@@ -71,16 +65,14 @@ class Json extends \Magento\Framework\Serialize\Serializer\Json
                 }
             case 'N':
                 $end .= ';';
-                if ($value[$length - 1] !== $end[0])
-                {
+                if ($value[$length - 1] !== $end[0]) {
                     return false;
                 }
                 break;
             default:
                 return false;
         }
-        if (($result = json_decode($value)) === false)
-        {
+        if (($result = json_decode($value)) === false) {
             $result = null;
             return false;
         }

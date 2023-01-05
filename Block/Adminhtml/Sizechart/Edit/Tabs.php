@@ -1,8 +1,8 @@
 <?php
 
 namespace Magepow\Sizechart\Block\Adminhtml\Sizechart\Edit;
-use Magento\Backend\Block\Widget\Tabs as WidgetTabs;
 
+use Magento\Backend\Block\Widget\Tabs as WidgetTabs;
 
 class Tabs extends WidgetTabs
 {
@@ -44,7 +44,7 @@ class Tabs extends WidgetTabs
                 )->toHtml(),
             ]
         );
-        
+
         return parent::_beforeToHtml();
     }
 }

@@ -9,8 +9,7 @@ class FlushCache
 
     public function __construct(
         \Magepow\Sizechart\Helper\Cache $helperCache
-    )
-    {
+    ) {
         $this->helperCache = $helperCache;
     }
 

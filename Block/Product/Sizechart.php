@@ -18,9 +18,7 @@ class Sizechart extends \Magento\Catalog\Block\Product\AbstractProduct
      * @var \Magiccart\Magicproduct\Model\Magicproduct
      */
     protected $_sizechartFactory;
-
     protected $_limit; // Limit Product
-
     protected $_parameters; // Condition Product
     protected $_request;
     protected $_abstractProduct;
@@ -54,17 +52,17 @@ class Sizechart extends \Magento\Catalog\Block\Product\AbstractProduct
         $store = $this->_storeManager->getStore()->getStoreId();;
 
         $collection = $this->_sizechartFactory->create()->getCollection()
-                        ->addFieldToSelect('*')
-                        ->addFieldToFilter('is_active', 1)
-                        ->addFieldToFilter('stores', array(array('finset' => 0), array('finset' => $store)))
-                        ->setOrder('sort_order', 'ASC');
+            ->addFieldToSelect('*')
+            ->addFieldToFilter('is_active', 1)
+            ->addFieldToFilter('stores', array(array('finset' => 0), array('finset' => $store)))
+            ->setOrder('sort_order', 'ASC');
 
         return $collection;
     }
 
     public function getSizeChart()
     {
-        if(!$this->hasData('size_chart')) {
+        if (!$this->hasData('size_chart')) {
 
             $collection = $this->getSizeChartCollection();
             $product    = $this->getProduct();
@@ -75,7 +73,7 @@ class Sizechart extends \Magento\Catalog\Block\Product\AbstractProduct
                 $parameters =  $data['parameters'];
                 $rule = $this->getRule($parameters);
                 $validate = $rule->getConditions()->validate($product);
-                if($validate){
+                if ($validate) {
                     $sizeChart = $item;
                     break;
                 }
@@ -99,7 +97,7 @@ class Sizechart extends \Magento\Catalog\Block\Product\AbstractProduct
             $type = 'sizechart-inline';
         } elseif ($typeDisplay == 2) {
             $type = 'sizechart-popup';
-        } 
+        }
 
         return $type;
     }
@@ -110,7 +108,6 @@ class Sizechart extends \Magento\Catalog\Block\Product\AbstractProduct
         if (is_array($conditions)) $rule->loadPost($conditions);
         return $rule;
     }
-
 
     public function getMedia($img = null)
     {

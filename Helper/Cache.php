@@ -30,7 +30,8 @@ class Cache extends \Magento\Framework\App\Helper\AbstractHelper
      * Flush Cache Action
      *
      */
-    public function flushCache() {
+    public function flushCache()
+    {
         $types = [
             'config',
             'layout',

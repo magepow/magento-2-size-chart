@@ -36,7 +36,7 @@ interface SizechartInterface
     public function setCreatedAt($createdAt);
     public function getTemplateCss();
     public function setTemplateCss($templateCss);
-    public function getConditions();  
+    public function getConditions();
     public function setConditions($conditions);
     public function getStoreView();
     public function setStoreView($stores);

@@ -2,32 +2,32 @@
 
 namespace Magepow\Sizechart\Controller\Adminhtml;
 
-abstract class Action extends \Magento\Backend\App\Action{
+abstract class Action extends \Magento\Backend\App\Action
+{
     /**
      * Core registry
      *
      * @var \Magento\Framework\Registry
      */
     protected $coreRegistry = null;
- 
+
     /**
      * @var \Magento\Framework\App\Response\Http\FileFactory
      */
     protected $fileFactory;
- 
+
     /**
      * @var \Magento\Framework\Stdlib\DateTime\Filter\Date
      */
     protected $dateFilter;
- 
-    
+
     protected $_sizechartFactory;
- 
+
     /**
      * @var \Psr\Log\LoggerInterface
      */
     protected $logger;
- 
+
     /**
      * @param \Magento\Backend\App\Action\Context $context
      * @param \Magento\Framework\Registry $coreRegistry
@@ -50,7 +50,7 @@ abstract class Action extends \Magento\Backend\App\Action{
         $this->_sizechartFactory = $sizechartFactory;
         $this->logger = $logger;
     }
- 
+
     /**
      * Initiate rule
      *
@@ -60,14 +60,12 @@ abstract class Action extends \Magento\Backend\App\Action{
     {
         $rule = $this->_sizechartFactory->create();
         $id = (int)$this->getRequest()->getParam('id');
- 
+
         if (!$id && $this->getRequest()->getParam('entity_id')) {
             $id = (int)$this->getRequest()->getParam('entity_id');
         }
- 
     }
- 
-   
+
     protected function _initAction()
     {
         $this->_view->loadLayout();
@@ -75,7 +73,7 @@ abstract class Action extends \Magento\Backend\App\Action{
             ->_addBreadcrumb(__('Magepow Sizechart'), __('Magepow Sizechart'));
         return $this;
     }
- 
+
     /**
      * Returns result of current user permission check on resource and privilege
      *

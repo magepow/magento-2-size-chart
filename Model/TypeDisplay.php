@@ -1,16 +1,18 @@
-<?php 
+<?php
+
 namespace Magepow\Sizechart\Model;
+
 use Magento\Framework\Data\OptionSourceInterface;
- 
+
 class TypeDisplay implements OptionSourceInterface
 {
-    
+
     public function getOptionArray()
     {
-        $options = ['1' => __('Inline'),'2' => __('Pop Up'), '3'=>__('Custom Tab')];
+        $options = ['1' => __('Inline'), '2' => __('Pop Up'), '3' => __('Custom Tab')];
         return $options;
     }
- 
+
     /**
      * Get Grid row status labels array with empty value for option element.
      *
@@ -22,7 +24,7 @@ class TypeDisplay implements OptionSourceInterface
         array_unshift($res, ['value' => '', 'label' => '']);
         return $res;
     }
- 
+
     /**
      * Get Grid row type array for option element.
      * @return array
@@ -35,7 +37,7 @@ class TypeDisplay implements OptionSourceInterface
         }
         return $res;
     }
- 
+
     /**
      * {@inheritdoc}
      */

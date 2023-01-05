@@ -8,9 +8,8 @@
             </argument>
         </arguments>
     </type>
-  
-    <virtualType name="Magepow\Sizechart\Model\ResourceModel\Sizechart\Grid\Collection" 
-        type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+
+    <virtualType name="Magepow\Sizechart\Model\ResourceModel\Sizechart\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
             <argument name="mainTable" xsi:type="string">sizechart_management</argument>
             <argument name="resourceModel" xsi:type="string">Magepow\Sizechart\Model\ResourceModel\Sizechart</argument>

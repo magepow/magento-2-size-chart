@@ -1,6 +1,7 @@
 <?php
 
 namespace Magepow\Sizechart\Controller\Adminhtml\Sizechart;
+
 class Save extends \Magento\Backend\App\Action
 {
     protected $_sizechartFactory;
@@ -28,7 +29,7 @@ class Save extends \Magento\Backend\App\Action
 
         if ($data) {
             $id = $this->getRequest()->getParam('sizechart_id');
-            if($id) $data['entity_id'] = $id; // fix conflict entity_id in product condition
+            if ($id) $data['entity_id'] = $id; // fix conflict entity_id in product condition
             $model = $this->_sizechartFactory->create();
             $storeViewId = $this->getRequest()->getParam('stores');
             $model->load($id);

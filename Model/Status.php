@@ -1,15 +1,17 @@
-<?php 
+<?php
+
 namespace Magepow\Sizechart\Model;
+
 use Magento\Framework\Data\OptionSourceInterface;
- 
+
 class Status implements OptionSourceInterface
 {
     public function getOptionArray()
     {
-        $options = ['1' => __('Enabled'),'0' => __('Disabled')];
+        $options = ['1' => __('Enabled'), '0' => __('Disabled')];
         return $options;
     }
- 
+
     /**
      * Get Grid row status labels array with empty value for option element.
      *
@@ -21,7 +23,7 @@ class Status implements OptionSourceInterface
         array_unshift($res, ['value' => '', 'label' => '']);
         return $res;
     }
- 
+
     /**
      * Get Grid row type array for option element.
      * @return array
@@ -34,7 +36,7 @@ class Status implements OptionSourceInterface
         }
         return $res;
     }
- 
+
     /**
      * {@inheritdoc}
      */
