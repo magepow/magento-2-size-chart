@@ -40,7 +40,7 @@ abstract class Action extends \Magento\Backend\App\Action{
         \Magento\Framework\Registry $coreRegistry,
         \Magento\Framework\App\Response\Http\FileFactory $fileFactory,
         \Magento\Framework\Stdlib\DateTime\Filter\Date $dateFilter,
-        \Magepow\Sizechart\Model\sizechartFactory $sizechartFactory,
+        \Magepow\Sizechart\Model\SizechartFactory $sizechartFactory,
         \Psr\Log\LoggerInterface $logger
     ) {
         parent::__construct($context);
