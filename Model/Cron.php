@@ -9,6 +9,8 @@ use Magento\Framework\App\Cache\TypeListInterface as CacheTypeListInterface;
 
 class Cron
 {
+    protected $_cacheTypeList;
+
     public function __construct(
         \Magento\Framework\Model\Context $context,
         \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList,
