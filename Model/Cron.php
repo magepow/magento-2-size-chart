@@ -9,15 +9,17 @@ use Magento\Framework\App\Cache\TypeListInterface as CacheTypeListInterface;
 
 class Cron
 {
-    protected $_cacheTypeList;
+    private $cacheTypeList;
+
+    private $cacheFrontendPool;
 
     public function __construct(
         \Magento\Framework\Model\Context $context,
         \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList,
         \Magento\Framework\App\Cache\Frontend\Pool $cacheFrontendPool
     ) {
-        $this->_cacheTypeList = $cacheTypeList;
-        $this->_cacheFrontendPool = $cacheFrontendPool;
+        $this->cacheTypeList = $cacheTypeList;
+        $this->cacheFrontendPool = $cacheFrontendPool;
     }
 
     public function flushCache()
