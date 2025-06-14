@@ -73,6 +73,7 @@ class Main extends Generic implements TabInterface
                     'label' => __('Store View'),
                     'title' => __('Store View'),
                     'required' => true,
+                    'value' => 0,
                     'values' => $this->_systemStore->getStoreValuesForForm(false, true)
                 ]
             );
