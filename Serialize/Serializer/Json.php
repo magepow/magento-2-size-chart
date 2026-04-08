@@ -10,11 +10,8 @@ class Json extends \Magento\Framework\Serialize\Serializer\Json
         if ($this->is_serialized($string)) {
             $string = $this->serialize($string);
         }
-        $result = json_decode($string, true);
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            throw new \InvalidArgumentException('Unable to unserialize value.');
-        }
-        return $result;
+
+        return parent::unserialize($string);
     }
 
     function is_serialized($value, &$result = null)
